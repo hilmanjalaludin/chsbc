@@ -1,0 +1,172 @@
+/*
+ *  def  	: style of grid
+ * ----------------------------------------------
+ *
+ *  author : razaki team 
+ *  link	: http://@razakitechnology.com
+
+ *  update : 2015-09-11 - normalisasi 
+ * 
+ **/
+
+/* ----------------------------------------------------------------------------
+grid first dfinition here 
+---------------------------------------------------------------------------- */
+table.custom-grid {border:0px solid #000;height:24px;	font-family:Trebuchet MS,Arial, sans-serif; }
+
+/* th on table of grid 
+----------------------------------------------------------------------------**/
+th.th-first{ height:25px; border-right:0px solid #dddddd; border-left:1px solid #dddddd; border-bottom:1px solid #dddddd; }
+th.th-middle{ height:25px; border-right:0px solid #dddddd; border-left:1px solid #dddddd; border-bottom:1px solid #dddddd; }
+th.th-lasted{ vertical-align:middle; border-right:1px solid #dddddd; border-left:1px solid #dddddd; border-bottom:1px solid #dddddd; height:25px; }
+
+/* th on table of grid 
+ ----------------------------------------------------------------------------*/
+td.content-first{text-align:center; font-size:11px; font-weight:normal; height:26px;	padding:2px 4px 2px 4px;border-right:0px solid #eeeeee; border-left:1px solid #eeeeee; border-bottom:1px solid #eeeeee; }
+td.content-middle{font-size:11px;font-weight:normal; height:26px; padding:2px 4px 2px 4px;  border-right:0px solid #eeeeee; border-left:1px solid #eeeeee; border-bottom:1px solid #eeeeee; }
+td.content-lasted{font-size:11px;font-weight:normal; height:26px; padding:2px 4px 2px 4px; border-right:1px solid #eeeeee; border-left:1px solid #eeeeee; border-bottom:1px solid #eeeeee;}
+
+/* boottom on td grid of table  
+ ----------------------------------------------------------------------------*/
+td.bottom-first {font-size:11px; font-weight:bold; border:0px solid #000; height:27px;border-right:0px solid #eeeeee;border-left:1px solid #eeeeee; border-bottom:1px solid #eeeeee; border-top:0px solid #eeeeee;}
+td.bottom-middle {font-size:11px; font-weight:bold; border:0px solid #000; height:27px;border-top:0px solid #eeeeee;border-right:0px solid #eeeeee;  border-bottom:1px solid #eeeeee; border-left:1px solid #eeeeee; }
+td.bottom-lasted {font-size:11px; font-weight:bold; border:0px solid #000; height:27px;border-top:0px solid #eeeeee;border-right:1px solid #eeeeee;  border-bottom:0px solid #eeeeee; border-left:1px solid #eeeeee; }
+
+
+/* th on table of grid 
+----------------------------------------------------------------------------*/
+.header_order{text-decoration:none;border:0px solid #000;cursor:pointer;}
+.header_order:hover{text-decoration:none;border:0px solid #000;cursor:pointer;}
+.up-rows {font-size:15px;color:red;}
+.down-rows {font-size:11px;color:red;}
+.onselect:hover{background-color:#FFFCCC;color:#703C04;}
+.selected-rows{background-color:green;color:#FFFFFF;}
+.bottom { border-bottom:1px solid #dddddd; }
+.valign-top{vertical-align:top;}
+.valign-midle{vertical-align:middle;}
+
+/* customize -text-part of grid 
+----------------------------------------------------------------------------*/
+.left{ text-align:left;}
+.left-text{ text-align:left;}
+.center-text{ text-align:center; }
+.right-text{ text-align:right;}
+.justify-text{text-align:justify;line-height:20px;color:#b66c0d;}
+
+/* grid table 
+----------------------------------------------------------------------------*/
+th.contact-history-table {padding:2px;border-bottom:1px solid #a8a9af;height:24px;color:#FFFFFF;}
+th.first{ border-right:1px solid #dddddd; }
+th.first:hover{ color:red;	cursor:pointer; background: #FFCB37;}
+td.contact-history-table {padding:0px;color:#6f6f94;background:url(../../../../library/gambar/textarea_bg.png) repeat-x;}
+td.content-history-list {padding:0px;color:#6f6f94;background:url(../../../../library/gambar/textarea_bg.png) repeat-x;}
+td.contents-middle{border-top:1px solid #c4c4d1;border-left:1px solid #E5E5EB;}
+
+/* grid table 
+----------------------------------------------------------------------------*/
+td.first{border-top:1px solid #c4c4d1; border-left:1px solid #E5E5EB;height:30px;}
+td.middle{border-top:1px solid #c4c4d1;border-left:1px solid #E5E5EB;height:30px;}
+td.lasted{border-top:1px solid #c4c4d1;border-right:1px solid #E5E5EB;border-left:1px solid #e5e5eb;height:30px;}
+td.first:hover{color:red;cursor:pointer;background-color:#FFFFFF;}
+td.middle:hover{color:red;cursor:pointer;background-color:#FFFFFF;}
+td.lasted:hover{color:red;background-color:#FFFFFF; cursor:pointer;}
+
+/* grid table 
+----------------------------------------------------------------------------*/
+div.text-content{ resize:both; overflow:auto;vertical-align:top;}
+span.call-status{font-weight:bold;color:#BBB000;}
+span.result-status{font-weight:bold;color:#FF4321;}
+
+
+/* customize footer history 
+----------------------------------------------------------------------------*/
+.page-web-voice{padding:2px;margin-top:2px;margin-bottom:0;font-size:11px;vertical-align:center;border-top:1px solid #ebfef7;clear:both}
+.page-web-voice ul{font-size:12px;font-weight:normal;margin-top:0;padding:0;list-style:none;display:inline-table;color:#87aacb;background-color:transparent;color:red}
+.page-web-voice span{margin-top:-10px}
+.page-web-voice-current{background-color:#25bcfb;color:#fff}
+.page-web-voice-normal{color:#87aacb;background-color:transparent;color:red}
+.page-web-voice li{cursor:pointer;margin:1px;border:1px solid #ddd;padding-left:8px;padding-right:8px;padding-bottom:4px;padding-top:4px}
+.page-web-voice li.title-pages{border:0 solid #fff;padding-left:4px;padding-right:4px;padding-bottom:2px;margin:1px;font-size:11px;color:#1b7f98}
+.page-web-voice li.title-pages:hover{background-color:transparent;color:red}
+.page-web-voice a{text-decoration:yes}
+.page-web-voice li:hover{background:#25bcfb;color:#fff}
+.page-web-voice ul li{display:block;position:relative;float:left}
+
+/* customize for sorter on selected columns 
+----------------------------------------------------------------------------*/
+span.desc { color:red; background:url(../../../../library/gambar/icon/bullet_arrow_top.png) no-repeat; padding-left:12px; }
+span.asc { background:url(../../../../library/gambar/icon/bullet_arrow_bottom.png) no-repeat; padding-left:12px; }
+
+/* customize footer history 
+----------------------------------------------------------------------------*/
+div.page-bottom-custom-nav{float:right;margin-right:40px;margin-top:6px;font-size:11px;color:#595e6f; border:0px solid #000000;}
+li.page-bottom-custom-grid{ color:#02094d;display: inline;list-style-type: none;padding-left:8px;padding-right:8px; padding-top:2px; padding-bottom:2px;}
+li.first{ border-right:1px solid #dddddd;}
+li.middle{ border-right:1px solid #dddddd;}
+li.lasted{ border-right:0px solid #dddddd;}
+li.total-record{background:url(../../../../library/gambar/icon/table.png) no-repeat 2% 2%;padding-left:25px; color:red;}
+li.pager-loader { background:url(../../../../library/gambar/loading.gif) no-repeat 2% 2%; background-size: 16px 16px; padding-left:25px; color:red;}
+li.refresh{background:url(../../../../library/gambar/icon/table_refresh.png) no-repeat 10% 10%;padding-left:25px; color:red;}
+li.refresh{cursor:pointer;}
+li.summary{ background:url(../../../../library/gambar/icon/sum.png) no-repeat 2% 2%;padding-left:25px; color:#066399;}
+
+/* customize of grid report  
+----------------------------------------------------------------------------*/
+table.ui-widget-report { font-family:Arial, Helvetica, sans-serif; color:#666; font-size:12px; text-shadow: 1px 1px 0px #fff; background:#eaebec; margin:20px; border:#ccc 1px solid; -moz-border-radius:3px; -webkit-border-radius:3px; border-radius:3px; -moz-box-shadow: 0 1px 2px #d1d1d1; -webkit-box-shadow: 0 1px 2px #d1d1d1; box-shadow: 0 1px 2px #d1d1d1; }
+th.header-report { color:brown; font-weight:normal; font-size:11px; font-weight:bold; }
+.header-report a {color:white;}
+.header-report a :hover{color:red;}
+
+/* add new report on grid 
+----------------------------------------------------------------------------**/
+th.header-report-left {border-left:1px solid #dddddd; border-right:1px solid #dddddd; border-top:1px solid #dddddd; border-bottom:1px solid #dddddd;}
+th.header-report-right { border-left:0px solid #dddddd; border-right:1px solid #dddddd; border-top:1px solid #dddddd; border-bottom:1px solid #dddddd;}
+th.header-report-split-left { border-left:1px solid #dddddd; border-right:0px solid #dddddd; border-top:1px solid #dddddd; border-bottom:0px solid #dddddd; }
+th.header-report-split-right {border-left:0px solid #dddddd; border-right:1px solid #dddddd; border-top:1px solid #dddddd; border-bottom:0px solid #dddddd; }
+td.bottom-report-left { padding:2px; height : 30px; border-left:1px solid #dddddd; border-right:0px solid #dddddd; border-top:0px solid dddddd; border-bottom:1px solid #dddddd; }
+td.bottom-report-right { padding:2px; height : 30px; border-left:0px solid #dddddd; border-right:1px solid #dddddd; border-top:0px solid dddddd; border-bottom:1px solid #dddddd; }
+
+/* error notification
+----------------------------------------------------------------------------*/
+.ui-widget-error-sql { margin:5px 0px 8px 0px;width:99%;padding:3px 2px 3px 8px ;line-height:22px;border:1px solid #dddddd;font-family:consolas;color:#4a6d8e;background-color:#f3f8fc;}
+
+/* class button link 
+----------------------------------------------------------------------------*/
+.ui-widget-button-li ul li{display:table-inline; position:relative;float:left;list-style:none;}
+.ui-widget-button-li li{ padding:3px 2px 3px 2px ;margin:0px 5px 0px 2px; width:75px; border:1px solid #dddddd; border-radius:7px;}
+
+/*
+ ui-widget-form-table-navbar 
+ -----------------------------------------------*/
+.ui-widget-button-navbar ul li { display:table-inline; position:relative;float:right;list-style:none;margin-top:-10px;}
+.ui-widget-button-navbar li {font-weight:normal; font-size:9px; padding:1px 2px 1px 3px; margin: 0px 5px 5px 2px;  border-radius:4px;}
+
+
+
+/*
+ create table by div element this will compatible with mobile css 
+ ---------------------------------------------*/
+.table-body-content {font-family:Trebuchet MS; margin:auto;vertical-align:top; min-width:20%; width:99%;}
+.table-cell-header{ color: #004276; font-size:12px; padding-left:4px;  border-left:1px solid #dddddd; border-bottom:0px solid #dddddd; border-top:1px solid #dddddd;}
+.table-cell-header:last-child{ border-right:1px solid #dddddd; }
+.table-cell-content{font-weight:normal; font-size:11px; padding-left:4px; border-left:1px solid #dddddd; border-top:1px solid #dddddd; height:20px; }
+.table-cell-content:last-child{ border-right:1px solid #dddddd; }
+.table-cell-content a{ text-decoration:none;}
+.table-body-content:first-child{ border-bottom:0px solid #dddddd;}
+.table-cell-selcted-one{ background-color:#FFFEEE;}
+.table-cell-selcted-two{ background-color:#FFFFFF;}
+.table-body-content:last-child{ border-bottom:1px solid #dddddd; margin-bottom: 25px;}
+.table-bottom-content { background-color:#FFFDDD;font-weight:bold;}
+.table-cell-header, .center { text-align:center;}
+.table-cell-header, .left { text-align:left; }
+.table-cell-header, .right{ text-align:right; }
+	
+	
+/* ui-hidden-border-clas  */
+.ui-hidden-border-top { border-top:0px solid #fff;}	
+.ui-hidden-border-right { border-right:0px solid #fff;}
+.ui-hidden-border-bottom{ border-bottom:0px solid #fff;}
+.ui-hidden-border-left { border-left:0px solid #fff;}
+/* 
+ ============================= * END STYLE *==========================================================
+*/

@@ -1,0 +1,105 @@
+/* START STYLES 
+ * -------------------------------------------------------------------------------------------------------
+ * @ pack	: userChrome.css  
+ * @ generate	: Autoit Firefox  
+ * @ date	: 2015-03-21 
+ * -------------------------------------------------------------------------------------------------------
+ *
+ * Unfortunately, the Frame sub-menu items don't have ids, so you can't select them individually.
+ * You should be able to select the whole sub-menu with menu[id='frame'] or #frame.
+ * separator above the items related to the page properties: source, infos, & properties
+ * -------------------------------------------------------------------------------------------------------
+ */
+#context-back{ display: none !important; }
+#context-forward{ display: none !important; }
+#context-stop{ display: none !important; }
+#context-sep-stop{ display: none !important; }
+#context-bookmarkpage{ display: none !important; }
+#context-savepage{ display: none !important; }
+#context-sendpage{ display: none !important; }
+#context-openlink{ display: none !important; }
+#context-openlinkintab{ display: none !important; }
+#context-sep-open{ display: none !important; }
+#context-bookmarklink{ display: none !important; }
+#context-savelink{ display: none !important; }
+#context-sendlink{ display: none !important; }
+#context-viewimage{ display: none !important; }
+#context-copyimage{ display: none !important; }
+#context-copyimage-contents{ display: none !important; }
+#context-sep-copyimage{ display: none !important; }
+#context-sendimage{ display: none !important; }
+#context-setWallpaper{ display: none !important; }
+#context-blockimage{ display: none !important; }
+#context-sep-viewbgimage{ display: none !important; }
+#context-viewbgimage{ display: none !important; }
+#context-savelink{ display: none !important; } ;
+#context-undo{ display: none !important; }
+#context-sep-undo{ display: none !important; }
+#context-cut{ display: none !important; }
+#context-paste{ display: none !important; }
+#context-delete{ display: none !important; }
+#context-sep-paste{ display: none !important; }
+#context-selectall{ display: none !important; }
+#context-sep-selectall{ display: none !important; }
+#context-searchselect{ display: none !important; }
+#context-viewpartialsource-selection{ display: none !important; }
+#frame-sep{ display: none !important; }
+#context-sep-properties{ display: none !important; }
+#context-viewsource{ display: none !important; }
+#context-viewinfo{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Expand"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Open"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Open in Tabs"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Manage Folder"] + menuseparator{ display: none !important; }
+#bookmarks-context-menu menuitem[label="New Folder..."] + menuseparator{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Open in New Window"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Open in New Tab"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Open in New Tab"] + menuseparator{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Cut"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Copy"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Paste"]{ display: none !important; }
+#bookmarks-context-menu menuitem[label="Paste"] + menuseparator { display: none !important;}
+#inspect-context-menu { display: none !important; }
+#context-inspect{ display: none !important; }
+#inspect-separator { display: none !important; }
+#context-sep-properties { display: none !important; }
+#context-viewpartialsource-selection {display: none !important;  }
+#context-viewpartialsource-mathml { display: none !important;  }
+#context-viewsource { display: none !important;  }
+#context-viewinfo { display: none !important;  }
+#toolbar-context-menu { display: none !important; }
+#main-window { background-color: transparent; background-image: linear-gradient(to bottom, rgb(255, 0, 0) 0%, rgb(255, 255, 0) 5%); }
+#PersonalToolbar { display:none !important; }
+#CustomizeToolbarWindow { display:none !important; }
+#tbx-bottom-toolbox { border-top-width: 0 !important; }
+#newtab-search-container{ display: none !important; }
+#newtab-scrollbox{display: none !important;}
+#context-metadata{display: none !important; }
+#main-menubar{ padding:0px; display: none !important;}
+#openLocation{display: yes !important;}
+#personal-bookmarks{display:none!important; }
+#newtab-search-form{display: none !important;}
+#newtab-search-logo{display: none !important;}
+#newtab-search-text{display: none !important;}
+#newtab-search-submit{ display: none; }
+#urlbar{display: none !important;}
+#urlbar-container{ display:none !important; }
+#searchbar{display: none !important;}
+#search-container{display:none!important; }
+#toolbar{display: yes !important;}
+#menu-bar{display: none;}
+#nav-bar{ display: none;}
+#toolbar-menubar { display: none !important; }
+tab {-moz-appearance: none !important; }
+tabbrowser .tabs-closebutton-box {display: none;}
+#tabContextMenu { display:none !important;}
+.tabbrowser-tabs > tab[selected="true"] .tab-text { color: navy !important; font-weight: normal !important; }
+.tabbrowser-tabs > tab:not([selected="true"]) .tab-text { color: black !important; }
+.tabbrowser-tabs > tab[busy] .tab-text {color: red !important; }
+.tabbrowser-tabs > tab[selected].tab-text{ color: red !important; }
+.tabs-closebutton { display: none !important; } .tab-close-button{ display:none !important; }
+.tabs-newtab-button {display:none !important;}
+.tabs-bottom { display: none !important; }
+.tabbrowser-tab { height: 0px !important; padding-right:0px !important; }
+.tabbrowser-tab { -moz-appearance: none !important; -moz-border-radius-topleft: 0px !important; -moz-border-radius-topright: 0px !important; }
+/* END STYLE */

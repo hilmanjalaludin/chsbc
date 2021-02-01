@@ -1,0 +1,637 @@
+<?php 
+ class EUI_Extendpager 
+{
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+var $arr_pager_print		 = array();
+var $arr_order_style 		 = array();
+var $arr_align_cols  	 	 = array();
+var $arr_label_rows  		 = array();
+var $arr_func_cols   		 = array();
+var $arr_width_cols  		 = array();
+var $arr_breakword_cols 	 = array();
+var $arr_row_format          = array();
+var $arr_event_row_click	 = array();	
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+var $arr_class_table 		 = array();
+var $arr_cell_spacing_table  = array();
+var $arr_cell_padding_table  = array();
+var $arr_source_table		 = array();
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+var $arr_checkbox_func		 = false;
+var $arr_onechecked_func	 = false;	
+var $arr_page_number		 = 0;
+var $arr_height_row_header 	 = 0;
+var $arr_height_row_content  = 0;
+var $arr_width_table 		 = 0;
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+private static $Instance = null;
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public static function &Instance() 
+{
+  if( is_null(self::$Instance) ) {
+	self::$Instance = new self();
+  }
+  return self::$Instance;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ function set_source_table( $row = null, $num = 0  )
+{
+  if( is_object($row) )
+  {
+	 $this->arr_source_table = $row->result_assoc();	
+	 $this->arr_page_number = $num;
+  }
+} 
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+  function select_row_field()
+{ 
+	$out = new EUI_Object( $this->arr_source_table );
+	$out->debug_field();
+ }
+ 
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function set_order_style( $key = null, $val='' )
+{
+  if( !is_array($key) ) 
+  {  
+	 $key = array($key => $val );  
+  }
+  
+  $this->arr_order_style = $key;
+  page_set_style($this->arr_order_style);
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public  function set_align_cols($key =NULL, $val='' )
+{
+   if( !is_array($key) )
+  {
+		$key = array( $key => $val );
+  }
+  
+  $this->arr_align_cols = $key;
+  page_set_align($this->arr_align_cols);
+  
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ function set_label_row($key, $val )
+{
+  if( !is_array($key) ){
+	$key = array($key => $val );
+  }
+  $this->arr_label_rows = $key;
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ function set_event_row_click( $key=null, $val='' )
+{	
+ if( is_null($key) ) return false;
+ 
+ if( !is_array( $key ) AND !is_null( $key ) ){
+ 	  $this->arr_event_row_click = array( $key => $val );
+ }
+   $this->arr_event_row_click = $key;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ function set_width_cols($key, $val )
+{
+	if( !is_array($key) ){
+		$key = array($key => $val );
+	}
+	
+	$this->arr_width_cols = $key;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ function set_breakword_cols($key, $val )
+{
+	if( !is_array($key) ){
+		$key = array($key => $val );
+	}
+	
+	$this->arr_breakword_cols = $key;
+	
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+function set_height_row_header( $val = 0 ){
+	$this->arr_breakword_cols = $val;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public  function set_height_row_content( $val  = 0 )
+{
+	$this->arr_height_row_content = $val;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public  function set_title_row_content( $val = '' )
+{
+	$this->arr_title_row_content = $val;
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function set_width_table($val= '' )
+{ 
+	$this->arr_width_table = $val;
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function set_class_table($key=null, $val='' )
+{
+  if( !is_array($key) ){
+	$key = array($key => $val );
+  }
+  $this->arr_class_table = $key;
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+
+function set_cell_spacing_table( $key = '' ){
+	$this->arr_cell_spacing_table = $key;
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+function set_cell_padding_table($key, $val ){
+	$this->arr_cell_padding_table = $key;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ function set_row_format($key=NULL, $val='' )
+{
+  if( !is_array($key) ){
+	$key = array($key => $val );
+  }
+   $this->arr_row_format = $key;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function set_checkbox_func( $chkbox = false, $onechecked = false ) 
+{
+	$this->arr_checkbox_func = $chkbox;
+	$this->arr_onechecked_func = $onechecked;
+ }
+ 
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function reset_pager_object( )
+{
+	$arr_pager = array
+	(
+		"arr_event_row_click"		=> array(),
+		"arr_pager_print"			=> array(),
+		"arr_order_style" 			=> array(),
+		"arr_align_cols" 			=> array(),
+		"arr_label_rows" 			=> array(),
+		"arr_func_cols"				=> array(),
+		"arr_width_cols"			=> array(),
+		"arr_breakword_cols" 		=> array(),
+		"arr_class_table" 			=> array(),
+		"arr_cell_spacing_table" 	=> array(),
+		"arr_cell_padding_table" 	=> array(),
+		"arr_source_table" 			=> array(),
+		"arr_checkbox_func" 		=> FALSE,
+		"arr_onechecked_func"		=> FALSE,
+		"arr_page_number" 			=> 0,
+		"arr_height_row_header" 	=> 0,
+		"arr_height_row_content"	=> 0,
+		"arr_width_table" 			=> 0
+	);
+	
+	foreach( $arr_pager as $object => $value ){
+		$this->$object = $value;
+	}
+} 
+
+// // $this->arr_class_table = $key; $this->arr_width_table
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function select_pager_width_table() 
+{
+  return (string)$this->arr_width_table;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function select_pager_class_table() 
+{
+ 
+ $classes = array();
+ $this->arr_class_table = array_values( $this->arr_class_table);
+ if( is_array( $this->arr_class_table )  AND count($this->arr_class_table) > 0   ) 
+	foreach( $this->arr_class_table as $class => $value ) 
+ {
+	$classes[] = $value;	
+ }
+ 
+ return join(" ", $classes);
+ 
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function select_pager_row_format() 
+{
+  return (array)$this->arr_row_format;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function select_pager_row_title() 
+{
+  return (string)$this->arr_title_row_content;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_label() 
+{
+  return page_labels();
+}
+
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_row_click( $id = '' )
+{
+  $arr_click = array();
+  if( is_array($this->arr_event_row_click) 
+	AND count($this->arr_event_row_click) > 0 ) 
+	foreach( $this->arr_event_row_click as $event => $func )
+ {
+	if( strlen($func) > 0 ) {
+		$arr_click[] = " $event =\"Ext.DOM.$func('$id');\" ";
+	}
+ }
+ 
+ return join("\t", $arr_click);
+ 
+} 
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_primary() 
+{
+  return page_primary();
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_class_header( $field = null ) {
+  return page_header( $field );
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_class_column( $field = null ) {
+  return page_column( $field );
+}
+
+ public function select_pager_align() 
+{
+  return page_get_align();
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_border() 
+{
+  return page_border();
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_width_cols( )  
+{
+  return (array)$this->arr_width_cols;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_breakword_cols()  
+{
+  return (array)$this->arr_breakword_cols;
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_rows() 
+{
+  return (array)$this->arr_source_table;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_number() 
+{
+  return $this->arr_page_number;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function select_pager_content()
+{
+	$breack_word = $this->select_pager_breakword_cols();
+	$arr_width = $this->select_pager_width_cols();
+	$labels  = $this->select_pager_label();
+	$primary = $this->select_pager_primary();
+	$aligns  = $this->select_pager_align();
+	$border  = $this->select_pager_border();
+	$number  = $this->select_pager_number();
+	$format  = $this->select_pager_row_format();
+	$title   = $this->select_pager_row_title();
+	$width   = $this->select_pager_width_table();
+	$class 	 = $this->select_pager_class_table();
+	
+// ---------- event row detail argument -------------	
+	echo "<table width=\"$width\" class=\"$class\" cellspacing=\"0\">\n";
+	echo  "<thead>\n";
+	echo "<tr height=\"26\">\n";
+	
+	if( $this->arr_checkbox_func ){
+		if( $this->arr_onechecked_func ){
+			echo "<th class=\"font-standars ui-corner-top ui-state-default th-first center\" width=\"3%\"><a href=\"javascript:void(0);\"><i class=\"fa fa-check-square\"></i></a></th>\n";
+		} else{
+			echo "<th class=\"font-standars ui-corner-top ui-state-default th-first center\" width=\"3%\"><a href=\"javascript:void(0);\" onclick=\"Ext.Cmp('$primary').setChecked();\"><i class=\"fa fa-check-square\"></i></a></th>\n";
+		}
+	}	
+	
+	echo  "<th class=\"font-standars ui-corner-top ui-state-default th-middle center\" width=\"5%\">&nbsp;No</th>\n";
+	if( is_array($labels) ) 
+		foreach( $labels as $Field => $LabelName) 
+	{
+		$class = $this->select_pager_class_header($Field); 
+		echo  "<th nowrap class=\"font-standars ui-corner-top ui-state-default th-". is($border,$Field)." ". is($border,$Field)." ". is($aligns,$Field) ."\" ". is($arr_width,$Field) ."><span class=\"header_order $class\"  title=\"Sort By $LabelName\" onclick=\"Ext.EQuery.orderBy('$Field');\">&nbsp;$LabelName</span></th>\n";
+	}
+	
+	echo  "</tr></thead>\n";
+	echo "<tbody>\n";
+	
+	foreach( $this->select_pager_rows() as $rows )
+	{ 
+		$row = new EUI_Object( $rows ); 
+		
+		$color = ($number%2!=0?'#FFFEEE':'#FFFFFF');
+		
+	//---------------------- chekcbox argument ---------------> 
+	
+		echo  "\n<tr class=\"onselect\" bgcolor=\"${color}\"> \n";
+		if( $this->arr_checkbox_func ){
+			if( $this->arr_onechecked_func ){
+				echo "<td class=\"content-first center\">". form()->checkbox( $primary, NULL, $row->get_value($primary), array("change" => "Ext.Cmp('$primary').oneChecked(this);"))."</td>";
+			} else{
+				echo "<td class=\"content-first center\">". form()->checkbox( $primary, NULL, $row->get_value($primary) )."</td>";
+			}
+		}	 
+		
+		
+		echo  "<td class=\"content-middle center\">$number</td>\n";		
+	// ----------------- label on the grid -------------------------------------------
+		
+		
+		if(is_array( $labels ) ) 
+			foreach( $labels as $Field => $LabelName )
+		{
+			$arr_event 	= $this->select_pager_row_click($row->get_value($primary));
+			$arr_color 	= $this->select_pager_class_column($Field); 
+			
+			$call_event = " $arr_color style=\"cursor:pointer;\" title=\"$title\" $arr_event ";
+			echo  "<td class=\"content-". is($border,$Field)." ". is($aligns, $Field) ."\" $call_event ". is($breack_word, $Field) .">". $row->get_value( $Field, is($format, $Field)) ."</td> \n";
+		}	
+		
+		echo  "</tr> \n";
+		$number++;
+	}
+	
+	echo "</tbody>";
+	echo "</table>";
+}
+
+// --------------------------------------------------------------------------------
+// end Class 
+	
+}
+?>

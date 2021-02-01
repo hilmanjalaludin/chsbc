@@ -1,0 +1,232 @@
+<?php
+
+class M_CallTrackingReport extends EUI_Model
+{
+
+// -----------------------------------------------------------------------------
+/*
+ *
+ * @ package		function get detail content list page 
+ * @ param			not assign parameter
+ */
+ 
+ private static $Instance   = null; 
+ public static function &Instance()
+{
+	if( is_null(self::$Instance) ){
+		self::$Instance = new self();
+	}	
+	return self::$Instance;
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+function __construct() {
+	$this->load->model(array('M_Report','M_SetCampaign','M_SysUser','')); 
+}
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function GroupFilter()
+{
+	return array
+	(
+		// 'filter_by_campaign' => 'Group By Campaign',
+		// 'filter_by_atm' => 'Group By ATM',
+		// 'filter_by_spv' => 'Group By SPV',
+		// 'filter_by_agent' => 'Group TSR',
+		// 'filter_by_atm_group_campaign' => 'ATM Group By Campaign',
+		// 'filter_by_spv_group_campaign' => 'SPV Group By Campaign',
+		// 'filter_by_agent_group_campaign' => 'TSR Group By Campaign',
+		
+		
+		'filter_campaign_group_atm' => 'Campaign Group By ATM',
+		'filter_campaign_group_spv' => 'Campaign Group By SPV',
+		'filter_campaign_group_agent' => 'Campaign Group By TMR',
+		'filter_campaign_group_date' => 'Campaign Group By Date'
+	);
+} 
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+function getAgent()
+{
+  $_conds = array();	
+	if( class_exists('M_SetCampaign')) 
+	{
+		$_conds  = $this -> M_SetCampaign -> _getCampaignGoals(2);
+	}	
+	
+  return $_conds;
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+function _getCampaignReady() 
+{
+  $_conds = array();	
+  if( class_exists('M_SetCampaign'))
+  {
+	$_conds  = $this -> M_SetCampaign -> _getCampaignGoals(2);
+  }	
+	
+  return $_conds;	
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function _getAgentByAtm( $AtmId= 0 ) 
+{
+  $_conds = array();
+  $param = array('spv_id' => $AtmId, 'user_state' =>1);
+  
+  if( $rows = $this -> M_SysUser -> _get_teleamarketer($param) ) 
+  {
+	$_conds = $rows;
+  }	
+	
+	return $_conds;
+ }
+ 
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function _getSpvByAtm( $AtmId= 0  )
+{
+ $_conds = array();
+ $this->db->select('a.UserId, a.full_name as SpvName ');
+ $this->db->from('tms_agent a');
+ $this->db->where('a.spv_id',$AtmId);
+ $this->db->where_in('a.handling_type', array(USER_LEADER));
+ $this->db->not_like("a.full_name","BUCK");
+ $this->db->order_by('a.full_name','ASC');
+ 
+ foreach( $this->db-> get() -> result_assoc() as $rows ) 
+ {
+	$_conds[$rows['UserId']] = $rows['SpvName'];
+  }
+ return $_conds;	
+} 
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function _getAgentBySpv( $SpvId= 0  )
+{
+  $_conds = array();
+  $this->db->select('a.UserId, a.full_name as AgentName ');
+  $this->db->from('tms_agent a');
+  $this->db->where('a.tl_id',$SpvId);
+  $this->db->where_in('a.handling_type', array(USER_AGENT_OUTBOUND,USER_AGENT_INBOUND));
+  $this->db->not_like("a.full_name","BUCK");
+  $this->db->order_by('a.full_name','ASC');
+ 
+  foreach( $this->db-> get() -> result_assoc() as $rows )
+  {
+	$_conds[$rows['UserId']] = $rows['AgentName'];
+  }
+  
+  return $_conds;	
+ 
+} 
+
+ //---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function Mode() 
+{
+	return array
+	(
+		'summary' => 'Summary'
+	);
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ 
+function _getCategory()
+{
+	$conds = array();
+	
+	$sql = "select a.CallReasonCategoryId, a.CallReasonCategoryName from t_lk_callreasoncategory a
+			where a.CallReasonCategoryFlags = 1";
+	$qry = $this->db->query($sql);
+	
+	if($qry->num_rows() > 0)
+	{
+		foreach($qry->result_assoc() as $rows)
+		{
+			$conds[$rows['CallReasonCategoryId']] = $rows['CallReasonCategoryName'];
+		}
+	}
+	
+	return $conds;
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+function _getUserATM() {  }
+
+
+// ======================================= END CLASS ====================================
+
+}
+?>

@@ -1,0 +1,49 @@
+@charset "utf-8";
+@import url("styles.chat.css");
+@import url("styles.grid.css");
+@import url("styles.icon.css");
+@import url("styles.complete.css");
+@import url("styles.helper.css");
+@import url("styles.about.css");
+@import url("styles.adminlte.css");
+@import url("styles.form.css?time=3");
+@import url("styles.report.css");
+@import url("styles.choosen.css?s=2");
+
+
+/* 
+ * @ def	 : import all css Here! 
+ * -------------------------------------------
+ *
+ * @ param  : null		
+ */
+ 
+body.disabled {user-select : none; -moz-user-select : none; -webkit-user-select : none; color: gray; cursor: pointer; }
+div#result_content_add td{padding:4px;}
+div#pager {background:url('../../../../library/gambar/pager_bg.png');  font-family:Arial, Helvetica, sans-serif; font-size:11px; margin-left:6px; border:1px solid #ddd; margin-top:-5; height:30px;margin-right:6px;  margin-bottom:20px;padding-left:4px; padding-top:4px;}
+
+/* @ pack : global class css place on here 
+ * ----------------------------------------
+ */
+.ui-widget-toolbars {font-family:Arial, Helvetica, sans-serif; font-size:11px; background-repeat: repeat-x; border:0px solid #dddddd; margin: 0px 5px 0px 5px; padding : 0px 0px 0px 0px;}
+.ui-widget-toolbars ul {height:25px; background-image:url('../../../../library/gambar/pager_bg.png'); border:1px solid #dddddd; margin: 0px -5px 0px -5px; padding: 8px 1px 1px 1px; text-align: left; }
+.ui-widget-toolbars  ul  li{ display: inline; }
+.ui-widget-toolbars li { margin: -20px 0px 1px 0px; padding: 2px 8px 2px 8px; list-style-type: none; text-align: left; }
+.ui-widget-toolbars li.middle {border-right:1px solid #EEEDDD; }
+.ui-widget-toolbars li.lasted { border-right:0px solid #EEEDDD;}
+.ui-widget-toolbars div.label {display: inline; color:red;border:0px solid #000000; font-size:11px; padding : 2px }
+.ui-widget-toolbars input {display: inline; border-radius:3px; border:1px solid #cccddd; font-size:11px;height:18px; background:url(../../../../library/gambar/input_bg.png); margin: -20px 5px 0px 2px; }
+.ui-widget-toolbars select { min-width: 70px; width:180px; display: inline; border-radius:3px; border:1px solid #cccddd; font-size:11px; height:22px; background:url(../../../../library/gambar/input_bg.png); margin: -20px 5px 0px 2px; }
+.ui-widget-toolbars input:hover { border:1px solid red; }
+.ui-widget-toolbars select :hover{ border:1px solid red; }
+.ui-widget-toolbars b { color:red; font-weight:normal;}
+
+/* ----------------------------------------------------------- */
+.box-shadow{padding:2px;-moz-box-shadow: 10px 10px 5px #888;-webkit-box-shadow: 10px 10px 5px #888;box-shadow: 2px 2px 5px #888;border:1px solid #eeeeee;margin:4px;padding:2px;}
+.h3{ float:right;padding-left:6px;width:200px;margin-left:5px;margin-top:5px;margin-bottom:20px;color:#746b6a;}
+
+/* ----------------------------------------------------------- */
+.ui-bottom-widget-navigation-bars {  display:table;  vertical-align:center;margin:-2px auto; width:100%;border-top:1px solid #eee; z-index:9999;float:left; }
+.widget-user-toolbar-footer { font-family:Arial, Helvetica, sans-serif;  width:100%;  background-color:#FFF;  font-size:12px; border:0px solid #ddd;  height:38px;  display:block; text-align:right;  margin:auto;}
+
+/** END CLASS CORE CSSS **/

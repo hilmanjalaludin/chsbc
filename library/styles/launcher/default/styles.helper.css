@@ -1,0 +1,97 @@
+/* default styles
+ ------------------------------------------------------- */
+   
+html{ background-color: #FFFFFF; }
+body { background: #FFFFFF; font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;  padding: 0 0 0 0; margin: 0 0 0 0; font-size: 11px; }
+a {	color: #E0691A;	}
+a:hover { color: #6C757A; }
+
+/* Add customize css for home not use table 
+ ----------------------------------------------------------*/
+ 
+.ui-widget-default-home {border:1px solid #dddddd;height:80px; padding:20px 0px 20px 0px; margin:5px 15px 5px -40px; border-radius:3px;  background: #ffffff url(../../../../library/gambar/instruction.gif) no-repeat right; color: #000000; font-family:Trebuchet MS;  font-size:16px; }
+.ui-widget-default-welcome { border:1px solid #dddddd; margin:5px; border-radius:3px; }
+.ui-widget-default-welcome p { margin:5px;font-family:Trebuchet MS;}
+.ui-widget-default-welcome li { font-family:Trebuchet MS; margin: 5px auto;}
+.ui-widget-default-welcome strong { font-size:12px;}
+
+/* oment - spiner class plugin of jquery */
+
+.ui-widget-ajax-spiner { vertical-align:center; text-align:center; float:center; height:100%; width:100%; background: #FFFFFF url(../../../../library/gambar/main-content-ajax-loader.gif)  50% 50%  no-repeat; opacity: 0.80; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 80); filter: alpha(opacity = 80); }
+.ui-widget-ajax-spiner-min { vertical-align:center; text-align:center; float:left; height:100%; width:100%; background: #FFFFFF url(../../../../library/gambar/loading.gif)  50% 50%  no-repeat; background-size:16px 16px; opacity: 0.80; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 80); filter: alpha(opacity = 80); }
+
+
+
+/* layout on maint content home page 
+ ------------------------------------------------------------ */
+
+#main_content { padding-left: 20px; font-size: 1.1em; }
+#foot { font-size: 1.1em; line-height: 2.8em; height: 36px; text-align: center; border:1px dotted #808080; position:absolute; bottom:0; width: 99.8%; overflow:auto; }
+#accordion { padding: 4px; width: 190px; }
+#accordions { padding:0px 4px 4px 4px; width: 190px; }
+#split {height:280px; width:200px; border:1px dotted #999;margin-top : 5px; overflow:auto; }
+
+
+/* layout group class on helper  
+ ------------------------------------------------------------ */
+ 
+.table { display: table; }
+.table_row { display: table-row; }
+.table_cell { display: table-cell; }
+
+/* layout group class on helper  
+ ------------------------------------------------------------ */
+ 
+.menu {}
+.menu ul, .menu ul li { display: inline; font-size: 1em; text-align: center; line-height: 25px; list-style-type: none; margin:0; padding:0; }
+.menu ul {height:25px;}
+.menu ul li a { display: block; background:transparent url(../../../../images/menu_bg.png) no-repeat scroll center bottom; color:#aaaaaa; height:25px; text-decoration:none; }
+.menu ul li.selected a { color:#ff6600; background:transparent url(../images/menu_bg_hover.png) no-repeat scroll center bottom; }
+.menu ul li.last a {background: none;}
+.menu ul li a:hover { color:#ff6600; background:transparent url(../../../../images/menu_bg_hover.png) no-repeat scroll center bottom; }
+.menu ul li.last a:hover { color:#ff6600; background: none; }
+
+/* layout group class on helper  
+ ------------------------------------------------------------ */
+ 
+.top_logo { padding: 2px 0 2px 0; color: #808080; float: left; }
+.top_logo_left { float: left; }
+.top_logo_right { padding: 0 0 0 35px; float: right; }
+.top_info { width: 555px; padding: 2px 0 2px 0; color: #808080; float: right; }
+.top_info_left { width: 250px; float: left; }
+.top_info_right { width: 290px; padding: 0 0 0 0; float: right; }
+
+/* layout group class on helper  
+ ------------------------------------------------------------ */
+.content_table { color: #414141; padding-left: 5px;	 padding-right: 5px; padding-top:8px; padding-bottom:8px; margin-bottom:200px; margin: 1px 0px 1px 0px; }
+.list_table { background: #f5f5f5; color: #414141; padding: 0 0 0 0;	margin: 0 0 0 0; }
+
+/* layout group class on helper  
+ ------------------------------------------------------------ */
+ 
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix {display:inline-block;}
+
+/* Hides from IE-mac \*/
+
+* html .clearfix { height:1%; }
+.clearfix {display:block;}
+
+/* End hide from IE-mac */
+/*Credits: Dynamic Drive CSS Library */
+/*URL: http://www.dynamicdrive.com/style/ */
+
+.chatLine{border-bottom:1px dotted blue;padding:5px;}
+#accordion { border:0px solid #000;width:200px;}
+p span {font-size:11px;}
+#purr-container { position: fixed; float: left; top: 0; position: fixed; z-index: 9999 !important; }
+.notice {position: relative;width: 324px;}
+.notice .close{position: absolute; top: 12px; right: 12px; display: block; width: 18px; height: 17px; text-indent: -9999px; background: url(../../../../library/gambar/purrClose.png) no-repeat 0 10px;}
+.notice-body {min-height: 50px;padding: 22px 22px 0 22px;background: url(../../../../library/gambar/purrTop.png) no-repeat left top;color: #f9f9f9;}
+.notice-body img {width: 50px; margin: 0 10px 0 0; float: left;}
+.notice-body h3 {margin: 0; font-size: 1.1em;}
+.notice-body p {margin: 5px 0 0 60px; font-size: 0.8em; line-height: 1.4em;}
+.notice-bottom {height: 22px;background: url(../../../../library/gambar/purrBottom.png) no-repeat left top;}
+h3 a {font-size:12px;color:#FFF}
+h3 a:hover {font-size:12px;color:#FFF}
+

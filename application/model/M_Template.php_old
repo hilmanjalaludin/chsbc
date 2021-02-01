@@ -1,0 +1,237 @@
+<?php
+
+/*
+ * @def : get uplaod tempalate name 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+ 
+class M_Template extends EUI_Model
+{
+
+
+private static $instance = null;
+
+
+/*
+ * @ def : get uplaod tempalate name 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+
+ 
+public static function & get_instance()
+{
+	if( is_null(self::$instance) )
+	{
+		self::$instance = new self();
+	}
+	
+	return self::$instance;
+}
+
+/*
+ * @ def : get uplaod tempalate name 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+public function M_Template()
+{
+	// run 
+}
+
+
+/*
+ * @def : get uplaod tempalate name 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+function _getDetailTemplate($TemplateId = null)
+ {	
+	$_data = array();
+	
+	if( !is_null($TemplateId))
+	{
+		$this -> db -> select('*');
+		$this -> db -> from('t_gn_template');
+		$this -> db -> where( array('TemplateId'=>$TemplateId) );
+		
+		$qry = $this -> db -> get();
+		if( !$qry->EOF() )
+		{
+			$_data = $qry -> result_first_assoc();
+		}
+	}
+	
+	return $_data;
+}
+
+/*
+ * @def : get uplaod tempalate name 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+function _getTemplateName($TemplateId= null )
+{
+
+    $_template = array();
+	
+	$this -> db -> select('*');
+	$this -> db -> from('t_gn_template');
+	$this -> db -> where('TemplateFlags',1);
+	
+	if( !is_null($TempalateId) ) 
+	{
+		$this -> db -> where('TemplateId',$TempalateId);	
+	}
+	
+	foreach($this -> db -> get() -> result_assoc() as $rows ) 
+	{
+		$_template[$rows['TemplateId']] = $rows['TemplateName'];
+	}
+	
+	return $_template;
+}
+
+/*
+ * @def : get uplaod tempalate name 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+function _getExtension( $FileName=null )
+{ 
+	$_name = null; $_data = explode('.',$FileName );
+	if(is_array($_data) )
+	{
+		$_name = strtoupper( $_data[count($_data)-1] );
+	}
+	
+	return $_name;
+} 
+
+
+/*
+ * @def : match columns  
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+ function _getMatch($Excel = null, $Database= null )
+ {
+	$_keyups = array_keys($Database);
+	$_values = array_values($Database);
+	
+	
+	$_conds = array(); $tots = 0; $totals = 0;
+	foreach( $Excel as $k => $v ) 
+	{
+		if(in_array(trim($v), $Database)) $tots+=1; 	
+		else
+		{
+			$_conds[$totals]= array('N'=>$v, 'Y' => $_values[$totals]); 
+		}
+		$totals++;
+	}
+	
+	if( $tots == $totals ) return true;
+	else
+	{
+		return $_header;
+	}
+ }
+ 
+ /*
+ * @def : get validate order set then edit by User  
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+  
+ function _getOrder($Excel = null, $Database= null )
+ {
+	$UrutData = array();
+	$_values  = array_values($Database);
+	
+	// urutkan kembali datanya 
+	
+	$i = 0;
+	foreach($Excel as $kdb => $Data ){
+		$UrutData[$i] = $Data;	
+		$i++;
+	}
+	
+	// cek posisi table && excel 
+	
+	$j = 0; $n = 1; $_not_ok = 0; $position = '';
+	while(true)
+	{
+		if( strtoupper(trim($_values[$j])) != strtoupper(trim($UrutData[$j])) ) 
+		{
+			$position[$_not_ok]=  array(
+				"N" => " pos : {$n}, Excel : {$UrutData[$j]}", 
+				"Y" => " pos : {$n}, Database : {$_values[$j]} " 
+			); 
+			$_not_ok++;
+		}
+		
+		if( $j==count($_values)) break;
+		$n++; $j++;
+	}
+	
+	// kembalikan hasilnya
+	
+	if($_not_ok ==0 ) return true;
+	else
+	{
+		return $position;
+	}
+	
+ }
+ 
+ 
+ /*
+ * @def : _getKeys * update mode 
+ * --------------------------------------------
+ * @ aksess : public on model only  
+ * @ param  : no available 
+ */
+ 
+public function _getKeys( $TemplateId=null )
+{
+	$_conds = false;
+	if( !is_null($TemplateId) ) 
+	{
+		$this -> db -> select("a.UploadColsName");
+		$this -> db -> from("t_gn_detail_template a");
+		$this -> db -> where("a.UploadTmpId",$TemplateId);
+		$this -> db -> where("a.UploadKeys",1);
+		
+		$num = 0;
+		foreach($this -> db ->get() -> result_assoc() as $rows ) {
+			$_conds[$num] = $rows['UploadColsName']; 
+			$num++;
+		}
+		
+	}
+	return $_conds;
+} 
+ 
+ 
+ 
+
+} 
+
+?>

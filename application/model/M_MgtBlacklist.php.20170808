@@ -1,0 +1,495 @@
+<?php
+class M_MgtBlacklist extends EUI_Model
+{
+	
+ private static $instance = null;
+
+
+// @singgleton / public static instance
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */
+ public static function &instance(){
+	if( is_null( self::$instance ) ){
+		self::$instance = new self();
+	}
+	return 	self::$instance;
+ } 
+ 
+ 
+
+// @singgleton / public static instance
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */ 
+ function __construct() { }
+ 
+ 
+// @singgleton / public static instance
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */ 
+ function _get_default()
+	{
+		$this->EUI_Page->_setPage(20); 
+		$this->EUI_Page->_setSelect("a.Id");
+		$this->EUI_Page->_setFrom("t_lk_blacklist a", TRUE);
+		
+	// --------- filter default  ----------------------------
+		$this->EUI_Page->_setAndCache("a.Upload_Id", "blacklist_file", TRUE);
+		$this->EUI_Page->_setLikeCache("a.CIF", "blacklist_id", TRUE);
+		$this->EUI_Page->_setLikeCache("a.Customer_Name", "blacklist_name", TRUE);
+		
+		return $this->EUI_Page;
+	}
+	
+	function _get_content()
+	{
+		$this->EUI_Page->_postPage(_get_post('v_page'));
+		$this->EUI_Page->_setPage(20);
+		$this->EUI_Page->_setArraySelect(array(
+			"a.Id As Id" => array("Id","Id","primary"),
+			"a.CIF as CIF" => array("CIF","ID Number"), 
+			"a.Customer_Name as Customer_Name" => array("Customer_Name","Customer Name"), 
+			"a.Upload_DateTs as Upload_DateTs" => array("Upload_DateTs","Upload Date"), 
+			"b.full_name as Upload_ById" => array("Upload_ById","Upload By"), 
+			"IF(c.UploadId is not null,c.UploadFileName,'-') as FileName" => array("FileName","File Name"), 
+			
+			/* xxxxxxxxxxxxxxxxxxxxx */
+		));
+		
+		$this->EUI_Page->_setFrom("t_lk_blacklist a");
+		$this->EUI_Page->_setJoin("t_gn_uploadreport c "," a.Upload_Id=c.UploadId", "LEFT");
+		$this->EUI_Page->_setJoin("tms_agent b "," a.Upload_ById=b.UserId", "LEFT", true);
+		
+	// --------------- set data filtering -------------------------------------------
+		$this->EUI_Page->_setAndCache("a.Upload_Id", "blacklist_file", TRUE);
+		$this->EUI_Page->_setLikeCache("a.CIF", "blacklist_id", TRUE);
+		$this->EUI_Page->_setLikeCache("a.Customer_Name", "blacklist_name", TRUE);
+
+	// set order 
+		
+		if( _get_have_post('order_by')){ 
+			$this->EUI_Page->_setOrderBy(_get_post('order_by'),_get_post('type'));
+		} else {
+			$this->EUI_Page->_setOrderBy('a.Id','ASC');	
+		}	
+		//echo $this->EUI_Page->_getCompiler();
+		
+		$this->EUI_Page->_setLimit();
+	}
+	
+	function _get_resource()
+	{
+		self::_get_content();
+		if( $this -> EUI_Page -> _get_query()!='')
+		{
+			//echo $this -> EUI_Page -> _get_query();
+			return $this -> EUI_Page -> _result();
+		}
+	}
+	
+	function _get_page_number()
+	{
+		if( $this -> EUI_Page -> _get_query()!='' )
+		{
+			return $this -> EUI_Page -> _getNo();
+		}
+	}
+	
+	function _get_file_name()
+	{
+		$datas = array();
+		
+		$sql = "select UploadId,UploadFileName from t_gn_uploadreport where UploadId<>1 and TotalSuccessRows>0 order by UploadDateTs DESC";
+		$qry = $this->db->query($sql);
+		
+		$datas[1] = 'INPUT MANUAL';
+		if($qry->num_rows()>0)
+		{
+			foreach($qry->result_assoc() as $rows)
+			{
+				$datas[$rows['UploadId']] = $rows['UploadFileName'];
+			}
+		}
+		
+		return $datas;
+	}
+	
+	function _SaveInput($param)
+	{
+		$_conds = false;
+		
+		$this->db->insert('t_lk_blacklist',array(
+			'CIF' 			=> $param['id_number'],
+			'Customer_Name' => $param['cust_name'],
+			'Upload_DateTs' => date('Y-m-d H:i:s'),
+			'Upload_ById' 	=> _get_session('UserId'),
+			'Upload_Id' 	=> 1,
+		));
+		
+		if($this->db->affected_rows()>0)
+		{
+			$_conds = true;
+		}
+		
+		return $_conds;
+	}
+	
+	/* FUNCTION OF BLACKLIST && X-DAYS */
+	function _CheckBlacklist($param)
+	{
+		$conds = false;
+		
+		$sql = "select Id from t_lk_blacklist where CIF='".$param['CIF']."'";
+		$qry = $this->db->query($sql);
+		
+		if($qry->num_rows()>0)
+		{
+			$this->db->insert('t_gn_blacklist_trx',array(
+				'CIF' => $param['CIF'],
+				'Customer_Name' => $param['NAME'],
+				'Upload_DateTs' => date('Y-m-d H:i:s'),
+				'Upload_ById' 	=> _get_session('UserId'),
+				'Upload_Id' 	=> $param['UploadId'],
+				'Upload_Notes' 	=> 'BLOCKING CUSTOMER',
+			));
+			
+			$conds=true;
+		}
+		
+		return $conds;
+	}
+	
+	function _CheckXDays($param)
+	{
+		$conds = false;
+		
+		$sql = "select 
+					a.".$param['field']." as `primary`, 
+					count(a.".$param['field'].") as total, 
+					max(b.CustomerUploadedTs) as last_upload, 
+					DATEDIFF(now(),max(b.CustomerUploadedTs)) as last_days 
+				from ".$param['table']." a 
+				left join t_gn_customer b on a.CustomerId = b.CustomerId
+				where a.".$param['field']." = '".$param['CIF']."'
+				group by a.".$param['field']." having 1=1 AND last_days < ".$param['XDAYS']." ";
+		$qry = $this->db->query($sql);
+		// echo $sql;
+		if($qry->num_rows()>0)
+		{
+			$row = $qry->result_assoc();
+			
+			$this->db->insert('t_gn_blacklist_trx',array(
+				'CIF' => $param['CIF'],
+				'Customer_Name' => $param['NAME'],
+				'Upload_DateTs' => date('Y-m-d H:i:s'),
+				'Upload_ById' 	=> _get_session('UserId'),
+				'Upload_Id' 	=> $param['UploadId'],
+				'Upload_Notes' 	=> 'BLOCKING XDAYS, LAST UPLOAD : '.$row[0]['last_upload'],
+			));
+			
+			$conds=true;
+		}
+		
+		return $conds;
+	}
+	
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */
+ 
+ // $row = $qry->result_assoc();
+ // $this->db->insert('t_gn_blacklist_trx',array(
+ // 'CIF' 			=> $param['CIF'],
+ // 'Customer_Name' => $row[0]['CustomerFirstName'],
+ // 'Upload_DateTs' => date('Y-m-d H:i:s'),
+ // 'Upload_ById' 	=> _get_session('UserId'),
+ // 'Upload_Id' 	=> $param['UploadId'],
+ // 'Upload_Notes' 	=> 'BLOCKING INCOMING, LAST INCOMING : '.$row[0]['last_upload'],
+ // ));
+ // $conds=true;
+ 
+function _CheckXDaysIncoming( $val = null  )
+{
+	
+	//print_r($val);
+// nilaiu kondisi awal 
+ 
+ $this->con = 0;
+	
+// push data tambhan untuk mempermudah process 
+// filter ke databas -nya 
+
+  $this->cok = CK();	
+  $this->val = Objective( $val );
+  
+// additional field && biar seragam aja .
+
+  $this->val->add("CallReasonId",   array( TBO, INC ));
+  $this->val->add("CustomerNumber", $this->val->field('CIF') );
+  $this->val->add("CustomerXday",   $this->val->field('XDAYS') );
+  
+// process data query disini ya 
+		
+  $sql = sprintf("SELECT  b.CustomerNumber as `primary`, 
+				  COUNT(b.CustomerNumber) as total, b.CustomerFirstName,
+				  MAX(b.CustomerUpdatedTs) as last_upload,
+				  DATEDIFF(now(),max(b.CustomerUpdatedTs)) as last_days
+				  FROM t_gn_customer b
+				  WHERE b.CustomerNumber = '%s'
+				  AND b.CallReasonId IN(%s)
+				  GROUP BY b.CustomerNumber 
+				  HAVING 1=1  AND last_days <=%d", 
+			$this->val->field('CustomerNumber'), 
+			$this->val->field('CallReasonId', array('ArrImplode')),  
+			$this->val->field('CustomerXday'));
+// echo $sql;
+// exit;	
+// process query && data recsource .
+			
+  $qry = $this->db->query( $sql );
+  if( $qry && $qry->num_rows()>0 ) {
+	  
+		// ambil data object pertama by record selector 
+		// on driver class . dan jika datatersebut masukan ke table transaksi baclist sebagai 
+		// reference .
+	
+		$this->row = $qry->result_first_record();
+		if( $this->row->find_value( 'CustomerFirstName' ) ) {
+		
+		// additional data field from recsource .
+	
+			$this->row->add('Upload_ById',   $this->cok->field('UserId') );
+			$this->row->add('Upload_Custno', $this->val->field('CustomerNumber'));
+			$this->row->add('Upload_Id', 	 $this->val->field('UploadId'));
+			$this->row->add('Upload_Notes',  sprintf("BLOCKING INCOMING, LAST INCOMING : %s", $this->row->field('last_upload') ));
+			$this->row->add('Upload_DateTs', date('Y-m-d H:i:s'));
+			
+		// insert data to table 
+		
+			$this->db->reset_write();
+			$this->db->set('CIF', 			 $this->row->field('Upload_Custno'));
+			$this->db->set('Customer_Name',  $this->row->field('CustomerFirstName') );
+			$this->db->set('Upload_DateTs',  $this->row->field('Upload_DateTs'));
+			$this->db->set('Upload_ById',    $this->row->field('Upload_ById'));
+			$this->db->set('Upload_Id', 	 $this->row->field('Upload_Id'));
+			$this->db->set('Upload_Notes', 	 $this->row->field('Upload_Notes'));
+		
+			$this->db->insert("t_gn_blacklist_trx");
+			// then will result 
+			$this->con+=1;
+		}
+   }
+  // return $conds;
+   return $this->con;
+}
+
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */
+ 
+function _checkDispositionData( $val = null  )
+{
+	$this->tot = 0;
+
+// additional data process
+	
+	$this->prv = _getPrevDate(date('Y-m-d'), -1 );
+	$this->val = Objective( $val );
+	
+	// this set on here .
+	
+	if( !$this->val->find_value('CIF') ){
+		return false;
+	}
+	
+	// additional data process
+	
+	$this->val->add('CallReasonId', array(WN,MV,BT,ID,NPU));
+	$this->val->add('CustomerNumber', $this->val->field('CIF'));
+	
+	//CallReasonId
+	
+	$sql = sprintf("select a.CustomerNumber as `primary`,
+				count(a.CustomerId) as total, a.CustomerFirstName,
+				MAX(a.CustomerUpdatedTs) as last_upload,
+				DATEDIFF(now(),max(a.CustomerUpdatedTs)) as last_days
+				from t_gn_customer a 
+					where a.CustomerNumber = '%s' 
+					and a.expired_date>=DATE(NOW())
+					and a.CallReasonId IN(%s)", 
+					  $this->val->field('CustomerNumber'),
+					  $this->val->field('CustomerNumber', array('trim')),  
+					  $this->val->field('CallReasonId', array('ArrImplode')));
+							
+	$qry = $this->db->query( $sql );
+	if( $qry && $qry->num_rows() > 0 ) {
+		$this->tot = (int)$qry->result_singgle_value();
+	}
+	
+	// jika memang ada data tersebut maka lakukan update saja expired - nya menjad today -1  
+	// status WN, BT, ID, NPU
+	if( $this->tot > 0 ) {
+		$sql = sprintf("update t_gn_customer a set a.expired_date = '' 
+						where a.CustomerNumber ='%s'  and a.CallReasonId IN(%s) ", 
+						$this->val->field('CustomerNumber', array('trim')),
+						$this->val->field('CallReasonId', array('ArrImplode')) );
+						
+		$this->db->query( $sql );		
+		return true;	
+	}
+	if( $this->tot > 0 ) {
+		
+		$this->con = 0;
+		$this->row = $qry->result_first_record();
+		if( $this->row->find_value( 'CustomerFirstName' ) ) {
+		
+		// additional data field from recsource .
+	
+			$this->row->add('Upload_ById',   $this->cok->field('UserId') );
+			$this->row->add('Upload_Custno', $this->val->field('CustomerNumber'));
+			$this->row->add('Upload_Id', 	 $this->val->field('UploadId'));
+			$this->row->add('Upload_Notes',  sprintf("DUPLICATE DATA, LAST INCOMING : %s", $this->row->field('last_upload') ));
+			$this->row->add('Upload_DateTs', date('Y-m-d H:i:s'));
+
+			// insert data to table
+			$this->db->reset_write();
+			$this->db->set('CIF', 			 $this->row->field('Upload_Custno'));
+			$this->db->set('Customer_Name',  $this->row->field('CustomerFirstName') );
+			$this->db->set('Upload_DateTs',  $this->row->field('Upload_DateTs'));
+			$this->db->set('Upload_ById',    $this->row->field('Upload_ById'));
+			$this->db->set('Upload_Id', 	 $this->row->field('Upload_Id'));
+			$this->db->set('Upload_Notes', 	 $this->row->field('Upload_Notes'));
+		
+			$this->db->insert("t_gn_blacklist_trx");
+			// then will result 
+			$this->con+=1;
+		}
+		return $this->con;
+	}
+	
+	return false;
+	
+} 
+
+
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */
+ 
+function _checkDispositionDataExpired( $stream = null ){
+	
+ if( is_null($stream) OR !is_array($stream) ){  
+	return FALSE; 
+ }
+ // on stream processing 
+ 
+ $this->stream = Objective( $stream );	
+ if( $this->stream->find_value( 'expired_date' ) ){
+	 $expired_date = date('Y-m-d', $this->stream->field('expired_date', 'strtotime') );
+	 if( strtotime( $expired_date ) < strtotime( date('Y-m-d') )  ){
+		return TRUE;
+	 }
+ }
+ return FALSE;
+ 
+}
+
+/**
+ * Parse out the attributes
+ *
+ * Some of the functions use this
+ *
+ * @access	private
+ * @param	array
+ * @param	bool
+ * @return	string
+ */
+ function _checkDispositionNotExpired( $val = null )
+{
+	 
+	$this->tot = 0;
+
+// additional data process
+	
+	$this->prv = _getPrevDate(date('Y-m-d'), -1 );
+	$this->val = Objective( $val );
+	
+	// this set on here .
+	
+	if( !$this->val->find_value('CIF') ){
+		return false;
+	}
+	
+	// additional data process
+	
+	$this->val->add('CallReasonId', array(WN,MV,BT,ID,NPU, INC,TBO));
+	$this->val->add('CustomerNumber', $this->val->field('CIF'));
+	
+	//CallReasonId
+	
+	$sql = sprintf("select count(a.CustomerId) as total from t_gn_customer a 
+					where a.CustomerNumber = '%s' 
+					and a.expired_date>=DATE(NOW()) and a.CallReasonId NOT IN(%s)", 
+					$this->val->field('CustomerNumber', array('trim')),  
+					$this->val->field('CallReasonId', array('ArrImplode')));
+	//echo $sql;
+	
+	$qry = $this->db->query( $sql );
+	if( $qry && $qry->num_rows() > 0 ) {
+		$this->tot = (int)$qry->result_singgle_value();
+	}
+	
+	return (  $this->tot ? true  : false );
+	
+ }
+ 
+
+	
+// ========= END CLASS 	===================
+	
+}
+?>

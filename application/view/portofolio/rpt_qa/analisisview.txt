@@ -1,0 +1,11 @@
+1. View untuk Suspend And Duration
+2. View untuk Daily Summary QA
+3. View untuk Report PerQa dan Perperiode
+
+- Report Yang Udahan 
+	- Performance Range Time Per Daily ^
+	- Performance Daily Summary ^
+	- Performance Range Date Per Qa
+	- Performance CallMon Permonth
+	- Performance Qa Per Year
+	- Report Daily Qa

@@ -1,0 +1,71 @@
+.treeview ul{ /*CSS for Simple Tree Menu*/
+	margin: 0;
+	padding: 2px;
+	font-family:Arial;
+	font-size:11px;
+	
+}
+
+.parent{
+	padding-top:4px;
+	padding-bottom:4px;
+}
+
+.treeview li{
+	background: white url(http://localhost:8080/svndevelshoping/EUI/library/gambar/icon/list.gif) no-repeat left center;
+	list-style-type: none;
+	padding-left:25px;
+	margin-top:12px;
+	margin-left:-25px;
+	
+}
+
+.treeview li.submenu{ 
+	background: white url(http://localhost:8080/svndevelshoping/EUI/library/gambar/icon/closed.gif) no-repeat;
+	cursor: hand !important;
+	cursor: pointer !important;
+	font-size:12px;
+	font-family:Arial;
+	font-weight:bold;
+	color:#0c4c88;
+}
+
+
+.treeview li.submenu ul{ 
+    display: none; 
+}
+
+.treeview .submenu ul li{ 
+	cursor: hand !important;
+	margin-bottom: 0px;
+	font-weight:normal;
+	margin-top: 5px;
+	margin-left:-4px;
+	margin-right:4px;
+	padding-left:18px;
+	padding-top:5px;
+	padding-bottom:5px;
+	color:#4577a5;
+	font-size:12px;
+}
+
+.treeview .submenu ul li.first{
+	border-top:0px solid #eee;
+	border-bottom:1px solid #eee;
+}
+
+.treeview .submenu ul li.middle{
+	border-top:0px solid #eee;
+	border-bottom:1px solid #eee;
+}
+
+.treeview .submenu ul li.lasted{
+	border-top:0px solid #eee;
+	border-bottom:1px solid #eee;
+}
+
+
+.treeview .submenu ul li:hover{
+	background-color:#FFFCCC;
+	color:#f40c07;
+}

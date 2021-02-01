@@ -1,0 +1,21 @@
+/* update untuk hsbc portof berkiut listnya */
+
+@2017-06-14 
+	/./libraries/EUI_Page.php
+	/./helper/EUI_Tools_helper.php
+	/./helper/EUI_Common_helper.php
+	/./model/M_SrcCustomerList.php
+	/./controller/CallAutoDial.php 
+	/./view/mod_auto_dial/*
+	/./view/src_customer_list/*
+	/./database/EUI_DB_result.php 
+	/./controller/SetCallResult.php 
+	
+	
+	
+@2017-06-15 
+		/./themes/blitzer-hsbc
+		/./plugin/jquery.spiner
+	
+	
+	

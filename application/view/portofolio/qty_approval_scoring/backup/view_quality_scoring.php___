@@ -1,0 +1,138 @@
+<script type="text/javascript">
+/* 
+ * @ def : toolbars on navigation 
+ * ------------------------------------------
+ *
+ * @ param : no define
+ * @ aksess : procedure  
+ */
+	Ext.DOM.handleScore = function(obj)
+	{
+		var total = 0;
+		var dom_id = obj.id;
+		var arr = dom_id.split('_');
+		var key = arr[1];
+				
+		var select = Ext.Serialize('frmScoring').getSelect();
+
+		for( var component in select ) {
+			var arr_cmp = component.split('_');
+			
+			if(arr_cmp[1] == key)
+			{
+				if(Ext.Cmp(component).getValue() != '')
+				{
+					total += parseInt(Ext.Cmp(component).getValue());
+				}
+			}
+		}
+		
+		Ext.Cmp('TotalScore_'+key).setValue(total);
+		( total > 2 ? Ext.Cmp('TotalScore2_'+key).setValue(2) : Ext.Cmp('TotalScore2_'+key).setValue(total) );
+		Ext.DOM.CountFinalScore();
+		total = 0;
+}
+
+/* 
+ * @ def : toolbars on navigation 
+ * ------------------------------------------
+ *
+ * @ param : no define
+ * @ aksess : procedure  
+ */	
+ 
+Ext.DOM.CountFinalScore = function()
+{
+		var score = 0;
+		var total = 0;
+		var input = Ext.Serialize('frmScoring').getInput();
+		
+		for(var i in input)
+		{
+			var cmp = i.split('_');
+			
+			if(cmp[0] == 'TotalScore')
+			{
+				if(Ext.Cmp(i).getValue() != '')
+				{
+					total += parseInt(Ext.Cmp(i).getValue());
+				}
+			}
+		}
+		
+		score = 100-(10*total);
+		
+		(score<0?Ext.Cmp('FinalScore').setValue(0):Ext.Cmp('FinalScore').setValue(score));
+		
+		score = 0;
+		total = 0;
+	}
+
+</script>
+
+<div id="div_score">
+<fieldset class="corner" style='border:0px solid #000;'>
+		<?php __(form()->hidden('FinalScore', null, 100));?>
+		<form name="frmScoring">
+			<?php
+			$no = 0;
+			if( isset($QualityScoring['Category'])) 
+			foreach($QualityScoring['Category'] as $key => $category)  { $no++; ?>
+			
+			<table class="custom-grid" style='border:0px solid #dddddd;' 
+				cellspacing='0' cellpadding='0' width='99%' align='center'> 
+				<tr>
+					<td class="ui-corner-top ui-state-default " colspan="3">
+						<span color="red" class="icon-product product-title-icon" 
+						style="padding:2px 0px 2px 16px;">&nbsp;&nbsp;:: <?php __($no.'. '.$category); ?></span></td>
+				</tr>
+				<?php 
+				foreach($QualityScoring['SubCategory'][$key] as $id => $value) { ?>
+				<tr class="onselect">
+					<td class="content-first text_caption bottom center"><?php __($value['ScoringQuestionNo']); ?>.</td>
+					<td class="content-middle text_caption bottom"><div align="left" style="width:550px;"><?php __($value['ScoringQuestion']); ?></div></td>
+					<td class="content-lasted bottom"><?php __(form()->combo("CboScore_".$key."_".$id,"select",$ComboScoring,
+						(isset($ComboScoring,$QtyScoring[$key]['point'][$id])?$QtyScoring[$key]['point'][$id]:'0'),
+						array('change'=>"javascript:handleScore(this);")));?>
+					</td>
+				</tr>
+				<?php  } ?>
+				<tr class="onselect">
+					<td class="bottom left" colspan="3">
+						<div width="100%" align="right">
+							<table cellpadding="0" cellspacing="0">
+								<tr>
+									<td class="text_caption">&nbsp;</td>
+									<td></td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="text_caption">Total Score</td>
+									<td><?php __(form()->input("TotalScore_".$key,"input_text",(INT)$QtyScoring[$key]['total1'],null,
+										array('readonly' => true,'style'=>'width:30px;text-align:center;')));?></td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td class="text_caption">Entahlah</td>
+									<td><?php __(form()->input("TotalScore2_".$key,"input_text",(INT)$QtyScoring[$key]['total1'],null,
+										array('readonly' => true,'style'=>'width:30px;text-align:center;')));?></td>
+									<td>&nbsp;</td>
+								</tr>
+							</table>
+						</div>
+					</td>
+				</tr>
+			</table>
+			
+			<?php } ?>
+	
+		<div> 
+			<table>
+				<tr>
+					<td class="text_caption">Remarks</td>
+					<td><?php __(form()->textarea('remarks', 'textarea',$QtyScoring['remarks'], 
+						array("keyup" =>"Ext.Cmp('call_remarksb').setValue(this.value);"), array('style'=>'color:blue;height:70px;width:750px;')));?>  </td>
+				</tr>	
+			</table>
+		</div>
+			</form>
+	</fieldset>
+</div>

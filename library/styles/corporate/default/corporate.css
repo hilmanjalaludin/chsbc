@@ -1,0 +1,217 @@
+/* 
+	
+	Style for Danamon
+  
+ */
+ 
+body, html { margin:0; padding:0; line-height: 1.5em; 
+	           font-family:Arial, Helvetica, sans-serif; 	           
+	           text-align:left;font-size:11px;
+			   color:#df3b5e;}
+	           
+.clear-both {
+	clear:both;
+}
+
+fieldset {text-align:left;}
+ 
+/*Inside*/
+#container-inside { margin: 0 auto; padding:0; width:'100%'; position: relative; height:777px;}
+#container-inside #header { background: url(../images/prambanan-header.png) no-repeat; background-size:100% 50px; width:auto; height:50px; margin: 0 0 0 0; padding: 0;}
+#container-inside #header #logo { position:absolute; margin:0; padding:0; left:55px; top:25px; width:247px; height:67px;}
+#container-inside #header #lang { z-index:3; text-align: center; top:0; background: url(images/bg-lang.png) no-repeat; display:block; width:70px; height:25px; position:absolute; right:30px;}
+#container-inside #menu { margin: 0 0 0 55px;}
+
+div#web-title-header{
+	background:url(../images/logo.png) no-repeat;
+	background-size:100% 50px; width:120px; height:55px; margin: 2 2 2 2; padding: 0;
+	text-shadow: 1px 1px 1px #000, 3px 3px 5px #FFFCCC;
+	font-family:Arial;
+	z-index:99;
+	position:fixed;
+	margin-top:-3px;
+	font-size:18pt;
+	font-weight:bold;
+	margin-left:0px;
+	color:#df3b5e; 
+}
+
+
+div#web-title-header:hover{ cursor:pointer; text-shadow: 1px 1px 1px #000, 3px 3px 2px #FFFCCC; color:#FFCB37; }
+
+.header-controls {
+	color:#df3b5e;
+	float:right;	
+	font-size:4px;	/*IE reserves space for the text even when there is no text. Setting the font-size to 0 removed your gap for UL */
+	padding-top:0px;
+	padding-right:10px;
+}
+
+.header-controls ul li {
+	float:left;
+	list-style-type:none;
+	margin-left:7px;	
+	color: #df3b5e;
+	font-size:12px;	
+	font-weight: bold;
+	text-decoration: none;
+}
+
+.header-controls ul li.first{ background:url('../../../../library/gambar/icon/user_suit.png') no-repeat top left; top: 0px; 
+border-left:0px solid #000; padding : 0px 8px 0px 20px; margin-left:0; }
+.header-controls ul li.middle { border-right:1px solid #d8e7ed; padding : 0px 5px 0px 5px; } /* paddding: top right bottom left */
+.header-controls ul li.lasted {  border-left:0px solid #000;  padding:0px 5px 0px 5px; border-right:0px solid #d8e7ed; }
+
+
+
+.header-controls a{
+	text-decoration:none;
+	color:#df3b5e;
+}
+
+.header-controls a:hover{
+	text-decoration:none;
+	color:orange;
+	font-weight:bold;
+}
+
+.menu {
+	background:#e25c77;
+	padding:0px;
+	margin-bottom:10px;
+	border-bottom:1px solid #cfd8f0;
+	border-top:1px solid #cfd8f0;
+}
+
+
+.menu ul{
+	z-index:99999;
+	font-size: 11px;
+	font-weight:bold; 
+	margin: 0;
+	padding: 2px;
+	list-style: none;
+	display: inline-table;
+}
+
+
+.first-menu{
+	display: block;
+	position: relative;
+	float: left;
+}
+.first-menu{
+	border-right:1px solid #d6e4e8;
+}
+li.lasted-menu{
+	border-right:0px solid #dddddd;
+}
+.menu li ul { display: none; }
+
+.menu ul li a {
+	display: block;
+	text-decoration: none;
+	color: #f7eef0;
+	padding: 2px 8px 2px 8px;
+	background: #e25c77;
+	white-space: nowrap;
+}
+
+.menu ul li a :hover { background: #ebf6fa; }
+.menu li:hover ul { 
+	display: block; 
+	position: absolute;
+}
+.menu li:hover li { 
+	float: none;
+	font-size: 11px;
+}
+.menu li:hover a { background: #e25c77; }
+.menu li:hover li a{ background: #e25c77; }
+
+
+.custdata {
+	font-family:Arial, Helvetica, sans-serif; 	 
+	font-size: 12px;
+}
+
+.form_title {
+	font-family:Arial, Helvetica, sans-serif; 	 
+	font-size: 18px;
+}
+
+/* 
+  Button styles 
+  generated using: http://cssgradientbutton.com/#
+*/
+.dn_button{
+ border:1px solid #DCA415; -webkit-border-radius: 5px; -moz-border-radius: 5px;border-radius: 5px;font-size:12px;font-family:arial, helvetica, sans-serif; padding: 8px 8px 8px 8px; text-decoration:none; display:inline-block;text-shadow: -1px -1px 0 rgba(165,169,78,0.3);font-weight:bold; color: #431801;
+ background-color: #FEDC6B; background-image: -webkit-gradient(linear, left top, left bottom, from(#FEDC6B), to(#FFD64B));
+ background-image: -webkit-linear-gradient(top, #FEDC6B, #FFD64B);
+ background-image: -moz-linear-gradient(top, #FEDC6B, #FFD64B);
+ background-image: -ms-linear-gradient(top, #FEDC6B, #FFD64B);
+ background-image: -o-linear-gradient(top, #FEDC6B, #FFD64B);
+ background-image: linear-gradient(to bottom, #FEDC6B, #FFD64B);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#FEDC6B, endColorstr=#FFD64B);
+}
+
+.dn_button:hover{
+ border:1px solid #fdc406;
+ background-color: #fed038; background-image: -webkit-gradient(linear, left top, left bottom, from(#fed038), to(#ffca18));
+ background-image: -webkit-linear-gradient(top, #fed038, #ffca18);
+ background-image: -moz-linear-gradient(top, #fed038, #ffca18);
+ background-image: -ms-linear-gradient(top, #fed038, #ffca18);
+ background-image: -o-linear-gradient(top, #fed038, #ffca18);
+ background-image: linear-gradient(to bottom, #fed038, #ffca18);filter:progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#fed038, endColorstr=#ffca18);
+}
+
+.box-shadow{background:url(../images/shaded_corner.jpg) 0% top no-repeat;filter:alpha(opacity=60);}	
+.extToolbars{text-align:left;}
+
+/* tabs-tabulasi */
+.tabs-tabulasi li a{ font-size:11px; font-family:'Arial', 'Trebuchet MS';}
+.tabs-tabulasi selec button{ font-size:11px; font-family:'Arial', 'Trebuchet MS';}
+.tabs-tabulasi .button{font-size:11px;}
+.tabs-tabulasi .select .long{font-size:11px;font-family: Arial}
+
+
+/* ***/
+.first-child{ 
+	background-color:#fff;
+	float:left;
+}
+.child{
+	margin-top:1000px;
+}
+
+.menu-hover{
+ background-color:#ebeff4;  
+ padding:5px 5px 100px 5px;
+ text-align:left;	
+ border-bottom:1px solid #d3eaf2;
+ width:250px;
+}
+.menu-hover:hover{
+ color:#FFFFFF;
+}
+
+#submenu ul{
+	border-top:0px solid #b6d3dd;
+	border-left:1px solid #FFFFFF;
+	padding-left:0px;
+	margin-top:0px;
+}
+
+#submenu li{
+	border-top:1px solid #b6d3dd;
+}
+.pertama{border-top:1px solid #eee;}
+#submenu a:hover{
+	display: block;
+	text-decoration: none;
+	color: #d75b17;
+	padding: 0px 10px 0px 10px;
+	background: #e0f0f5;
+	white-space: nowrap;
+}
+
+

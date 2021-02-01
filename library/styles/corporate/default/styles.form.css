@@ -1,0 +1,155 @@
+/*
+ * @ pack : style sheet for form & property attribute only 
+ * -------------------------------------------------------------------------
+ * -------------------------------------------------------------------------
+ * all attribute form input please save in here 
+ * -------------------------------------------------------------------------
+ */
+
+/*
+ * @ pack : form style sheet customize 
+ * ------------------------------------------
+ */
+.uppercase {  text-transform: uppercase; }
+.lowercase {  text-transform: lowercase; }
+.textarea {padding:2px 4px 2px 5px;resize:both;border-radius:3px; outline: none;line-height:20px;border:1px solid #dddddd;background:#fcffff url(../../../../library/gambar/pager_bg.png) repeat-x; }
+.select {border-radius:3px;border:1px solid #cccddd;font-size:11px;height:26px;background:url(../../../../library/gambar/input_bg.png);width:auto;}
+.input_text {border-radius:3px;border:1px solid #cccddd;font-size:11px;height:22px;background:url(../../../../library/gambar/input_bg.png);}
+.font-standars13 {font-size:12px;}
+.font-standars12 {font-size:12px;}
+.font-standars11 {font-size:11px;}
+.text_header {text-align:right;color:red;font-size:12px;font-family:Trebuchet MS;}
+.text_caption{padding-top:4px;padding-bottom:2px;color: #223777;font-size:12px;font-family:Trebuchet MS;text-align:right;}
+.text_disabled{padding-top:4px;padding-bottom:2px;color: #dddddd;font-size:12px;font-family:Trebuchet MS;text-align:right;}
+
+.box{width:70px;}
+.auto{width:'100%';}
+.tolong{width:250px;}
+.tolong{width:255px;}
+.tolong{width:250px;}
+.date{width:70px;}
+.select_multiple { border-radius:3px;border:1px solid #dddddd;height:100px;font-size:11px;background:#fcffff url(../../../../library/gambar/pager_bg.png);}
+.left { text-align:left;}
+.right{ text-align:right;}
+.center{ text-align:center;}
+.kotak{ width:30px;}
+.button{ border-radius:3px;padding-left:20px; padding-right:5px; padding-bottom:22px; padding-top:5px; border:1px solid #c6d0e6; vertical-align:middle;margin:8px 8px 8px 0px;  background-color:#f2f6f4;color:#067346;font-family:Arial;font-size:11px; font-weight:bold;cursor:pointer; background-position: 4px 5px;}
+.button:hover{background-color:#d6e1f6;color:red;cursor:pointer;color:white;}
+.divbutton{padding:5px 5px 0px 20px; border:1px solid #c6d0e6; vertical-align:middle;margin:2px 8px 0px 2px;  background-color:#f2f6f4;color:#067346;font-family:Arial;font-size:11px; font-weight:bold;cursor:pointer; background-position: 4px 5px;}
+.divbutton:hover{ background-color:#d6e1f6;color:red;cursor:pointer;color:white;}
+.form-required{ border-color:red; }
+.label-readonly { display: table-cell; vertical-align: middle; padding:2px 0px 2px 1px;width:'100%';}
+
+/* ---------------------- test UL checklist -------------------------*/
+
+.label { height: auto;border:0px solid #dddddd; padding:-10px 0px 0px -20px;}
+.label ul {  text-indent:2px; list-style: none;list-style-position:outside;  margin:-5px 0px 0px 0px;} 
+.label li:before {content: '✔'; margin-left: -1em; margin-right: 5px;}
+.label li {padding:4px 0px 4px 0px; margin:4px 5px 0px -25px; }
+li.li-first { border-bottom:0px solid #dddddd;}
+li.li-middle { border-bottom:0px solid #dddddd; border-top:1px solid #dddddd; }
+
+/* ---------------------- test UL checklist -------------------------*/
+
+.input_text:hover{ border:1px solid brown;} 
+.select:hover{ border:1px solid brown;} 
+.textarea:hover{ border:1px solid brown;} 
+
+/*
+ orm-attribute - data on HTML 
+--------------------------------------------------------------*/ 
+input.long{width:180px;}
+select.long{width:185px;}
+textarea.long{width:185px;}
+input.superlong {width:300px;}
+select.superlong {width:305px;}
+textarea.superlong {width:295px;}
+input.tolong{width:210px;}
+select.tolong{width:215px;}
+textarea.tolong{width:210px;}
+div p{font-size:11px;} 
+form{display:inline;}
+img{border:0px;}
+input[type="checkbox"] {height: 1.2em; width: 1.2em; vertical-align: middle; margin: 0 0.4em 0.4em 0; border: 1px solid rgba(0, 0, 0, 0.3); background: -webkit-linear-gradient(#FCFCFC, #DADADA); 
+-webkit-appearance: 'yes'; -webkit-transition: box-shadow 100ms; box-shadow:inset 1px 1px 0 #ffffff, 0 0 7px rgba(0,0,0,0.3); -webkit-border-radius:2px; border-radius:3px;cursor:pointer; }
+
+
+/*
+ button - markup - on - section -div   
+--------------------------------------------------------------*/
+div.ui-widget-button-section{ color: #808080; padding:  2px 0 2px 10px; margin: 0 0 0 0; }
+div.ui-widget-button-section button { border: 1px solid #d0d0d0; height: 20px; color: #222222; font-size: 11px; font-family: Arial, Helvetica, sans-serif; vertical-align: middle; }
+
+/*
+ on widget foto frame  
+--------------------------------------------------------------*/
+ 
+.corner table td{ padding:2px; }
+.corner{border:1px solid #dddddd; border-radius:5px; padding : 3px 4px 0px 4px; }
+.corner legend {font-size:13px;color:#024284; padding : 2px 3px 2px 12px;}
+.mozshadow {border:1px solid #dddddd; padding : 3px 4px 0px 4px;} 
+.mozshadow legend {font-weight:normal;padding:2px 12px 3px 12px;  }
+.mozshadow-font{ font-weight:normal;} 
+.label-required { color:red; font-size:11px;}
+
+/*
+ on widget foto frame  
+--------------------------------------------------------------*/
+ 
+.ui-widget-foto { color:#dddddd;text-align:center;vertical-align:middle;font-size:11px;padding:1px; width: 110px; height:140px; background-image:url('../../../../library/gambar/unon.png'); background-size: 100% 100%;border:1px solid #BACEDD; background-repeat: no-repeat; border-radius:3px;cursor:pointer;}			 
+.ui-widget-foto:hover { background-color:#000000; opacity:0.5; }
+.ui-widget-content-corner { margin:3px 8px 8px 8px; padding:5px 5px 10px 8px;}
+.ui-widget-select-order { background-color:#FFFCCC;color:#994303; }
+.ui-widget-tab-close-customize{ cursor:pointer;}
+.ui-widget-tab-close-customize:hover{ cursor:pointer;border:1px solid #dddddd;}
+.ui-widget-unselect-order {}
+.ui-widget-panel-form { margin:-2px 8px 12px 8px; padding :0px 0px 4px 0px; border-bottom:1px solid #dddddd;}
+.ui-widget-label-textmessage{ padding: 3px;  font-family:Trebuchet MS; letter-spacing:1px; font-size:11px; border-radius:5px; margin:3px 2px 3px 2px; text-align:left; }
+/*
+ on widget foto frame  
+--------------------------------------------------------------*/
+.ui-widget-form-caption-top{ caption-side : top; display: table-caption;}
+.ui-widget-form-caption-bottom{ caption-side : bottom; display: table-caption;}
+.ui-widget-form-table { display: table; margin: 10px 0px 0px 10px; float : left; }
+.ui-widget-form-table-center{ display: table; margin: 10px 0px 0px 10px; float : center; }
+.ui-widget-form-table-left{ display: table; margin: 10px 0px 0px 10px; float : left; }
+.ui-widget-form-table-right{ display: table; margin: 10px 0px 0px 10px; float : right; }
+.ui-widget-form-table-compact{ display: table; margin: 10px 0px 0px 10px;}
+.ui-widget-form-row  { display: table-row; padding:5px 2px 5px 2px; margin : 3px 3px 3px 3px}
+.ui-widget-form-cell { display: table-cell; padding:5px 2px 5px 2px; white-space: nowrap; margin:10px 1px 0px 1px; vertical-align:middle;}
+.ui-widget-form-table-maximum{ width:99% }
+/*
+ on cell context div data 
+--------------------------------------------------------------*/
+.ui-widget-form-cell-wrap-line-height-22 {display: table-cell; padding:5px 2px 5px 2px; line-height:22px; white-space: normal; margin:10px 1px 0px 1px; vertical-align:middle; font-size:11px;font-family:Trebuchet MS; }
+.ui-widget-form-cell-wrap-line-height-20 {display: table-cell; padding:5px 2px 5px 2px; line-height:20px; white-space: normal; margin:10px 1px 0px 1px; vertical-align:middle; font-size:11px;font-family:Trebuchet MS; }
+.ui-widget-form-cell-wrap-line-height-18 {display: table-cell; padding:5px 2px 5px 2px; line-height:18px; white-space: normal; margin:10px 1px 0px 1px; vertical-align:middle; font-size:11px;font-family:Trebuchet MS; }
+.ui-widget-form-cell-wrap-line-height-16 {display: table-cell; padding:5px 2px 5px 2px; line-height:16px; white-space: normal; margin:10px 1px 0px 1px; vertical-align:middle; font-size:11px;font-family:Trebuchet MS; }
+
+/*
+ on widget - tabs 
+ --------------------------------------------------------------*/
+ .ui-widget-tab-frame { background-color: #FBFEFF; }
+ 
+/*
+ on widget-span-button-class - tabs 
+ --------------------------------------------------------------*/
+.ui-button-span-widget{ width: 16%;color:silver; padding:1px;display: table-cell; float : right; margin-right: 8px; }	 
+.ui-button-span-widget:hover{color:red;cursor:pointer;}
+
+/*
+ on widget-span-button-class - tabs 
+ --------------------------------------------------------------*/
+ .ui-widget-content-top { vertical-align:top;}
+ .ui-widget-content-middle { vertical-align:middle;}
+ .ui-widget-content-bottom { vertical-align:top;}
+ 
+/*
+ --------- select down ----------------------- */
+ 
+.toggle-notactive{ background : url(../../../../library/gambar/icon/bullet_toggle_minus.png) no-repeat top left; }
+.toggle-active{ background : url(../../../../library/gambar/icon/bullet_toggle_plus.png) no-repeat top left; }
+.toggle-notactive{ float:right;cursor:pointer;  z-index:9999;}
+.toggle-active{float:right;cursor:pointer; z-index:9999;}
+.ui-down-active { padding:6px 6px 6px 6px; margin: -25px -25px 2px 0px; }
+.ui-down-default{ padding:6px 6px 6px 6px; margin: 0px -20px 2px 0px;  } 

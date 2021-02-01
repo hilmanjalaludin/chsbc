@@ -1,0 +1,56 @@
+/* 
+ * @ def 		 icon attribut css 
+ * ------------------------------------------------------------------------------------
+ * 
+ * @ aksess 	 privat on local active layout 
+ * @ author      razaki team 
+ * @ link		 http://razakitechnology.com/siteraztech/product/web-application 
+ * --------------------------------------------------------------------------------------
+ */
+ 
+.icon-application {background:url('../../../../library/gambar/icon/application_edit.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-customers {background:url('../../../../library/gambar/icon/group.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-callresult{background:url('../../../../library/gambar/icon/aux-p.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-userapplication {background:url('../../../../library/gambar/icon/group_key.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-product {background:url('../../../../library/gambar/icon/application_add.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-menulist {background:url('../../../../library/gambar/icon/app.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-campaign {background:url('../../../../library/gambar/icon/database_add.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-callactivity {background:url('../../../../library/gambar/icon/book_open.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-benefit{background:url('../../../../library/gambar/icon/award_star_bronze_1.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.pdf{background:url('../../../../library/gambar/icon/page_white_acrobat.png') no-repeat top left; cursor:pointer;height:24px; padding-left:12px;font-family:Arial;}
+.excel{background:url('../../../../library/gambar/icon/page_white_excel.png') no-repeat top left; cursor:pointer;height:24px; padding-left:12px;font-family:Arial;}
+.icon-phone {background:url('../../../../library/gambar/icon/ipod_sound.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.button-call{ border:0px; background:url('../../../../library/gambar/dial-icon.png') no-repeat top left;cursor:pointer; width:75px;height:35px;}
+.edit-users-x{background:url('../../../../library/gambar/user_edit.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.icon-brodcastmsg{background:url('../../../../library/gambar/icon/email_go.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.button-hangup{border:1px;background:url('../../../../library/gambar/hangup-icon.png') no-repeat top left;cursor:pointer;width:75px;height:35px;}
+.icon-workshop{background:url('../../../../library/gambar/icon/house.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.icon-dialog-title{ height:18px;padding-left:9px;}
+
+.save{background:url('../../../../library/gambar/icon/disk.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.reply{background:url('../../../../library/gambar/icon/email_edit.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.reply-all{background:url('../../../../library/gambar/icon/email_edit.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.forward{background:url('../../../../library/gambar/icon/email_go.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.original{background:url('../../../../library/gambar/icon/page_code.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.close{background:url('../../../../library/gambar/icon/cancel.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.update{background:url('../../../../library/gambar/icon/page_save.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.upload{background:url('../../../../library/gambar/icon/database_go.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.assign{background:url('../../../../library/gambar/icon/tick.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.verify{background:url('../../../../library/gambar/icon/zoom_in.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.add{background:url('../../../../library/gambar/icon/add.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.clear{background:url('../../../../library/gambar/icon/zoom_out.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.search{background:url('../../../../library/gambar/icon/zoom.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;} 
+.add-page{background:url('../../../../library/gambar/icon/page_add.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.remove{background:url('../../../../library/gambar/icon/delete.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial;}
+.remove-chart{ background:url('../../../../library/gambar/icon/cart_delete.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.add-chart{ background:url('../../../../library/gambar/icon/cart_add.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.input-chart{ background:url('../../../../library/gambar/icon/cart_put.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.edit-chart{ background:url('../../../../library/gambar/icon/cart_edit.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.shoping-chart{ background:url('../../../../library/gambar/icon/cart.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.next-chart{ background:url('../../../../library/gambar/icon/cart_go.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.hangup{ background:url('../../../../library/gambar/icon/acw.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.page-blank{ background:url('../../../../library/gambar/icon/page.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.page-go{ background:url('../../../../library/gambar/icon/page_white_go.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+.play{ background:url('../../../../library/gambar/icon/control_play_blue.png') no-repeat top left;height:24px;padding-left:12px;font-family:Arial; }
+
+

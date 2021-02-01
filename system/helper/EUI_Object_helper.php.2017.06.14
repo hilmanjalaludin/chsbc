@@ -1,0 +1,342 @@
+<?php
+// --------------------------------------------------
+/*
+ * @ pack  : convert array to object on EUI v.1.2 
+ * @ notes : testing object array 
+ * @ auth  : omens 
+ */
+ 
+class EUI_Object  {
+
+private $arr_val = "";
+// -------------------------------------------
+/*
+ * @ pack : instance 
+ */
+
+protected $arr_rows = array();
+protected $arr_func_arg = array();
+
+
+// ----------------------------------------------
+/*
+ * @ pack : instance 
+ */
+ 
+ private static $Instance = null;
+
+ 
+// --------------------------------------------
+/*
+ * @ pack : instance 
+ */
+ 
+ public static function &Instance()
+{
+  if( is_null(self::$Instance) )
+  {
+	 self::$Instance = new self();
+  }
+  
+  return self::$Instance;
+  
+ }
+
+// --------------------------------------------
+/*
+ * @ pack : aksesor 
+ */
+
+ public function EUI_Object( $arr_object = null )
+{
+ 
+  if( !is_null($arr_object) )
+  {
+	 $this->Inialize( $arr_object );	
+  }  
+}
+
+// --------------------------------------------
+/*
+ * @ pack 	: Inialize 
+ * @ aksess : public method 
+ */
+ 
+ public function fetch_ready()
+{
+ if( is_array( $this->arr_rows ) 
+	AND count( $this->arr_rows ) > 0  )
+ {
+	return true;
+  }	
+ return false;
+}
+
+
+// --------------------------------------------
+/*
+ * @ pack 	: Inialize 
+ * @ aksess : public method 
+ */
+ 
+public function Inialize( $arr_object = null )
+{
+	$this->arr_rows =(array)$arr_object;
+}
+
+// --------------------------------------------
+/*
+ * @ pack : _value 
+ */
+ 
+ protected function _value( $value = null ) 
+{
+  $value = trim($value);
+  if( is_null($value) ) {
+	return NULL;
+  }
+ 
+  if( isset($this->arr_rows[$value]) AND empty($this->arr_rows[$value]) 
+	  AND !$this->arr_rows[$value] == 0 ) 
+ {
+	return NULL;
+  }
+  
+ if( isset($this->arr_rows[$value]) AND is_null($this->arr_rows[$value]) ) {
+	return NULL;
+ } 
+ 
+ if( !isset($this->arr_rows[$value]) ) {
+	return NULL;
+ } 
+   
+   return $this->arr_rows[$value];
+  
+}
+
+// --------------------------------------------
+/*
+ * @ pack : _event_value if have function attribute value  
+ */
+ 
+ protected function _event_value( $value = null, $event=null, $context = null ) 
+{
+	
+  if( is_null( $context ) ){	
+	$_value = $this->_value( $value );
+  } else {
+	  $_value = $context;
+  }
+  
+  if(!function_exists( $event ) )
+  {
+	return $_value; 
+  }
+  
+   return call_user_func_array( $event, array($_value) );  
+  
+}
+
+// --------------------------------------------
+/*
+ * @ pack : instance 
+ * @ aksess : public method 
+ 
+// ---------------------------------------------
+  
+ * @ par1 : field value 
+ * @ par2 : function  
+ */
+  
+ public function get_splits_value( $value = null , $splite="," ) 
+{
+ $arr_value  = array();
+  if( count($arr_value) == 0 AND  !is_null($value) )
+ {
+	$arr_value = explode($splite,  $this->_value($value) );
+ }
+ 
+ return (array)$arr_value;
+	
+}
+
+// --------------------------------------------
+/*
+ * @ pack : instance 
+ * @ aksess : public method 
+ 
+// ---------------------------------------------
+  
+ * @ par1 : field value 
+ * @ par2 : function  
+ */
+ 
+public function get_array_value( $value = null , $event = NULL ) 
+{
+ $arr_value = explode(",", $this->_value( $value )); 
+ 
+ $arr_outer = array();
+ if( is_null($event) ) 
+ {
+	foreach( $arr_value as $k => $val ) {
+		if( strlen( trim($val) ) > 0 ){
+			$arr_outer[$k] = $val;
+		}
+	}	
+ }
+ 
+  if( !is_null($event) ) 
+ {
+	foreach( $arr_value as $k => $val ) 
+	{
+	  if( strlen( trim($val) ) > 0 )
+	  {	
+		if(function_exists($event) ){
+			$arr_outer[$k] = call_user_func_array($event, array($val)); 
+		} else {
+			$arr_outer[$k] = $val;
+		}
+	  }	
+	}	
+ }
+ 
+ return $arr_outer;
+}
+ 
+// --------------------------------------------
+/*
+ * @ pack : instance 
+ * @ aksess : public method 
+ 
+// ---------------------------------------------
+  
+ * @ par1 : field value 
+ * @ par2 : function  
+ */
+ 
+ public function get_value( $value = null , $event = NULL ) 
+{
+
+ if( is_null($event) ) {
+	return $this->_value( $value );
+ }
+
+ if(!is_array($event) ){
+	$event = array( $value => $event);	
+ }
+	
+  $arr_val = $arr_val;
+  foreach( $event as $n => $argc ) 
+  {
+	if( !$n ) {
+		 $arr_val= $this->_event_value($value, $argc);
+	}
+	 else {
+		$arr_val= $this->_event_value($value, $argc,  $arr_val);
+	}
+  }
+  
+ return  $arr_val;
+}
+
+// --------------------------------------------
+/*
+ * @ pack : _object 
+ */
+ 
+ protected function _object( $arr_object = null ) 
+{
+   return (object)$arr_object;
+}
+
+
+// --------------------------------------------
+/*
+ * @ pack : get_object 
+ */ 
+ 
+ public function fetch_rows( $n = 0 )
+{
+   $arr_rows = $this->get_value( $n ); // first_rows 
+    if( is_array( $arr_rows ) ) 
+   {
+	  $this->arr_header_value = (array)$arr_rows;
+   }
+   
+   return $this->arr_header_value;
+} 
+
+
+
+// --------------------------------------------
+/*
+ * @ pack : get_object 
+ */ 
+
+public function debug_label()
+{
+	echo "<pre>";
+		print_r($this->fetch_label());
+	echo "</pre>";
+		
+} 
+
+
+// --------------------------------------------
+/*
+ * @ pack : get_object 
+ */ 
+
+public function debug_field()
+{
+	echo "<pre>";
+		print_r($this->fetch_field());
+	echo "</pre>";
+		
+} 
+
+// --------------------------------------------
+/*
+ * @ pack : get_object 
+ */ 
+ 
+ public function fetch_field()
+{
+  $arr_field = array();	 
+  $arr_rows = $this->fetch_rows();
+  if( is_array( $arr_rows ))
+  {
+	  $arr_field  = (array)_getKey($arr_rows);
+	  if(is_array($arr_field))
+	   foreach($arr_field as $k => $value ) 
+	 {
+		$this->arr_label[$value] = $value;
+	  }
+  }	
+  
+  return $this->arr_label;
+} 
+
+
+// --------------------------------------------
+/*
+ * @ pack : get_object 
+ */ 
+ 
+ public function fetch_label()
+{
+  return array_keys($this->arr_rows);
+} 
+
+// --------------------------------------------
+/*
+ * @ pack : get_object 
+ */
+ 
+ public function get_object() 
+{
+   return $this->_object( $this->arr_rows);
+}
+// END CLASS  
+}
+?>

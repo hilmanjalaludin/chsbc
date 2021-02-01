@@ -1,0 +1,118 @@
+*{margin:0; padding:0;font-family:Arial, Helvetica, sans-serif}
+
+div#main{
+	margin: 0px;
+	background-image: url(../images/menuback.jpg);
+	background-repeat: repeat-x;
+	font-size:12px;
+}
+
+img{border:none}
+.logo-baner{background:url(../images/Banner3.png)  no-repeat top left;background-size:1500px 100px;background-color: #669999 ;}
+
+#main{float:left; width:100%;}
+#top_bookmark{ margin-left:auto; margin-right:auto; width:750px; padding-bottom:5px; text-align:right; padding-right:30px;}
+#top{width:'100%'; margin-top: 0;margin-right: auto;margin-bottom: 0;margin-left: auto; padding-top:0; height:95px}
+.clear{ clear:both}
+#top p{float:right; font-weight:bold; font-size:12px; padding:15px 35px 0 0; text-align:right}
+#top div span a.new{ font-size:12px; color:#f26200; font-family:Verdana, Arial, Helvetica, sans-serif; text-decoration:underline;}
+#top div span a.new:hover{ font-size:12px; color:#666666; font-family:Verdana, Arial, Helvetica, sans-serif; text-decoration:none;}
+
+
+#nav-menu{width:'90%';height:40px;margin-top: 0;margin-right: auto;margin-bottom: 0;margin-left: auto;font-size:12px;border:0px solid #000;}
+#nav-menu div {float:left; width:675px;margin:0 0 0 0; padding:0;color:#fff;}
+#nav-menu div ul{margin:0; padding:0}
+
+#nav-menu ul#menu li{float:left; list-style:none; margin-top:2px; font-size:12px;font-weight:bold;color:yellow;}
+#nav-menu  ul#menu li a.menu-li{text-decoration:none; color:green; display:block; border-right:1px groove #7e7e7e; padding:8px 16px 8px 16px}
+#nav-menu  ul#menu li a.menu-li:hover{ color:#ff4321; text-decoration:none;background-image:url(../images/top_background.png); background-repeat:repeat-x;}
+#nav-menu  ul#menu li a.menu-li:active{ color:#ff4321; text-decoration:none;background-image:url(../images/top_background.png); background-repeat:repeat-x;}
+#nav-menu ul#menu.selected{ background-image:url(../images/top_background.png); background-repeat:repeat-x; padding:8px 16px 8px 16px;border-right:1px groove #7e7e7e; color:#333}
+#nav-menu ul#menu.home{ border-left:1px solid #ddd;}
+#nav-menu ul#menu img{float:left; margin:7px 0 0 0}
+
+.hover-active{ color:#ff4321; text-decoration:none;background-image:url(../images/top_background.png); background-repeat:repeat-x;}
+.hover-activew{text-decoration:none;background-image:url(../images/top_background.png); background-repeat:repeat-x;}
+/*Initialize*/
+
+ul.submenu li.child {
+    list-style-type: none;
+    display: inline-block;
+}
+/*Link Appearance*/
+ ul.submenu li.child a {
+   text-decoration:none; 
+   color:#7e7e7e; 
+   display:block; 
+   display:inline-block;
+}
+/*Make the parent of sub-menu relative*/
+ul#menu li {
+    position: relative;
+}
+/*sub menu*/
+ul.submenu{
+    display:none;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    width: 100px;
+	
+}
+ul#menu li:hover ul.submenu {
+    display:block;
+	color:red;
+	display:inline-block;
+	
+}
+ ul.submenu li.child a {
+	color: green;
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif; 
+	font-weight:normal;
+	display: block;
+    width: 200px;
+    text-decoration: none;
+    text-indent:19px;
+	margin-left:4px;
+ }
+ 
+ ul.submenu li.child a:hover {
+	color:#333777;
+ }
+ 
+ ul.submenu li.child:hover {
+	display:block; 
+    display:inline-block;
+	background-color:#ffffff;
+	font-size:12px;
+	font-family:Verdana, Arial, Helvetica, sans-serif; 
+	font-weight:normal;
+	padding:8px 16px 8px 0px;
+	border-bottom: 1px solid #dddddd; 
+ }
+  ul.submenu li.child{
+	width:200px;
+	margin:-2px;
+	font-family:Verdana, Arial, Helvetica, sans-serif; 
+	padding:8px 16px 8px 0px;
+	background-color:#eeeeee;
+	border-top:0px solid #dddddd; 
+	border-bottom:0px groove #ddddd; 
+	border-right:1px solid #dddddd; 
+	border-left:1px solid #dddddd; 
+	border-bottom: 1px solid #dddddd; 
+ }
+ .corner{
+	margin-top:3px;
+ }
+.box-shadow{
+	background:url(../images/shaded_corner.jpg) 0% top no-repeat;
+	 filter:alpha(opacity=60);
+}	
+ a.logout{color:yellow;text-decoration:none;}
+ a.logout:hover{color:red;text-decoration:none;}
+.list_table td{font-family:Trebuchet MS;padding-left:6px;}
+.list_table li{font-family:Trebuchet MS;color:#777333;font-size:11px;line-height:20px;}
+.list_table ol{margin-left:18px;}
+.list_table p{font-family:Trebuchet MS; color:#777333;}

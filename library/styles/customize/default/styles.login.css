@@ -1,0 +1,10 @@
+/* CSS style
+ ----------------------------------------------------------------------------------------*/
+body{ margin:0; padding:0; height:100%; margin-top:0px; margin-bottom:0px; height:'100%'; margin-left:0px; margin-right:0px; }
+.button-login { min-width:10%; background-color:#0694B3;border:#0694B3; }
+.button-login :hover{ background-color:#0694B3;border:#0694B3; }
+.input-form-login { min-width:200px;width:93%; height:24px;}
+.input-form-login{ min-width:200px;width:93%;height:24px; }
+.title-form-login{ min-width:200px;color:#BBBFFF;font-size:12px;}
+.ui-widget-title-welcome{ min-width:200px;font-size:18px; text-shadow: 1px 4px 1px #eeeddd;  margin-top:-20px;color:#0694B3; }
+.modal-dialog{min-width:200px;width:400px; }

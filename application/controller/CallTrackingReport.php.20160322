@@ -1,0 +1,660 @@
+<?php
+/*
+ * @ modul : report call tracking controller 
+ * @ object : superclass 
+ * ----------------------------------------------------------------
+  
+ * @ param : - 
+ * @ param : - 
+ */
+ 
+class CallTrackingReport extends EUI_Controller 
+{
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ 
+ var $FilterGroupBy = null;
+ var $Mode = null;
+ var $R_Model = null;
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ 
+ public function __construct()
+{
+ parent::__construct();
+ $this->load->model(array(base_class_model($this)));
+ $this->load->helper(array('EUI_Object'));
+ 
+ // -------------------------- set attr --------------
+  self::_set_attr_content_report();
+ 
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		static 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+
+ public function _set_attr_content_report()
+{
+  $out = new EUI_Object( _get_all_request() ); 	
+  if( is_null( $this->R_Model ) ) 
+ {
+	// $this->R_Model['filter_by_atm_group_campaign'] = array('class' => 'R_CallTrackAtmGroupByCampaign', 'title' => 'ATM Group By Campaign');
+	// $this->R_Model['filter_by_spv_group_campaign'] = array('class' => 'R_CallTrackSpvGroupByCampaign','title' => 'SPV Group By Campaign');
+	// $this->R_Model['filter_by_agent_group_campaign']= array('class' => 'R_CallTrackTsrGroupByCampaign','title' => 'TSR Group By Campaign');
+	$this->R_Model = array(
+		'filter_by_campaign' => array('class' => 'R_CallTrackGroupCampaign', 'title' => 'Group By Campaign'),
+		'filter_campaign_group_date'=> array('class' => 'R_CallTrackCampaignGroupDate','title' => ''),
+		'filter_campaign_group_agent' => array('class' => 'R_CallTrackCampaignGroupTsr','title' => ''),
+		'filter_campaign_group_atm' => array('class' => 'R_CallTrackCampaignGroupAtm','title' => ''),
+		'filter_campaign_group_spv' => array('class' => 'R_CallTrackCampaignGroupSpv','title' => '')
+	);
+}	
+	
+  if( _get_have_post('Filter') ) 
+ {
+	$this->FilterGroupBy = $out->get_value('Filter');
+  }
+  
+ if( _get_have_post('mode') ) {
+	$this->Mode = $out->get_value('mode');  
+ }	
+ 
+ 
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function index()
+{
+  if( _get_is_login() == FALSE )
+ {
+	return FALSE;
+ }
+ 
+ // ------------ ok  ---------------------------------------------------------
+ 
+ $this->load->view("rpt_call_tracking/report_call_track_nav", array (
+	'agent_call_center' => $this -> {base_class_model($this)} -> getAgent(),
+	'mode_call_center'  => $this -> {base_class_model($this)} -> Mode(),
+	'group_filter_by'   => $this -> {base_class_model($this)}->GroupFilter()
+  ));
+  
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+
+ public function GroupFilterBy() 
+{
+	
+	
+ $out = new EUI_Object( _get_all_request() ); 	
+ if( !_get_have_post('method') ) {
+	return null;
+ }
+ 
+// --------------- next process --------------------------------------------------------
+
+	$method 	= $out->get_value('method','strval');
+	$object 	= $out->get_value('object','strval');
+	$styles 	= $out->get_value('styles','strval');
+	$properties = $out->get_value('properties','strval');
+	
+// ----------- chek object --------------------------------------
+	
+	$this->arr_result = "";
+	if( $out->get_value('object','strtolower') =='listcombo' )
+	{
+		if( $out->get_value('GroupId')=='filter_campaign_group_agent')
+		{
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+				$out->get_value('properties','strval'), // name
+				$out->get_value('styles','strval'),  // styles
+				call_user_func(array(get_class($this), $out->get_value('method','strval'))), // value
+				array(),
+				array("change" => "ShowAtmByCampaign(this.value,'combo','select superlong');"), 
+				array("event" => array(
+					'func_label' => 'ShowAtmByCampaign',
+					'func_value' => array('CampaignId','combo','select superlong') 
+				))
+			);
+		}
+		else if( $out->get_value('GroupId')=='filter_campaign_group_atm' ){
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+				$out->get_value('properties','strval'), // name
+				$out->get_value('styles','strval'),  // styles
+				call_user_func(array(get_class($this), $out->get_value('method','strval'))), // value
+				array(),
+				array("change" => "ShowAtmByCampaign(this.value,'listCombo','select superlong');"), 
+				array("event" => array(
+					'func_label' => 'ShowAtmByCampaign',
+					'func_value' => array('CampaignId','listCombo','select superlong') 
+				))
+			);
+		}
+		
+		else if( $out->get_value('GroupId')=='filter_campaign_group_spv' ){
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+				$out->get_value('properties','strval'), // name
+				$out->get_value('styles','strval'),  // styles
+				call_user_func(array(get_class($this), $out->get_value('method','strval'))), // value
+				array(),
+				array("change" => "ShowAtmByCampaign(this.value,'combo','select superlong');"), 
+				array("event" => array(
+					'func_label' => 'ShowAtmByCampaign',
+					'func_value' => array('CampaignId','combo','select superlong') 
+				))
+			);
+		}
+		else {
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+			$out->get_value('properties','strval'),
+			$out->get_value('styles','strval'), 
+			call_user_func(array(get_class($this), $out->get_value('method','strval'))));
+		}
+	}
+	else if( $out->get_value('object','strval') == 'combo' ) 
+	{
+		if( $out->get_value('GroupId') =='filter_by_agent')
+		{
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+			$out->get_value('properties','strval'), 
+			$out->get_value('styles','strval'), 
+			call_user_func(array(get_class($this), $out->get_value('method','strval'))),
+			NULL, array("change" => "new ShowSpvByAtm(this.value,'combo','select superlong','ui-widget-content-row2','ui-widget-label-row2','SPV Name');"));
+		}
+			
+		if( $out->get_value('GroupId')=='filter_by_spv'){
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+			$out->get_value('properties','strval'), 
+			$out->get_value('styles','strval'), 
+			call_user_func(array(get_class($this), $out->get_value('method','strval'))),
+			NULL,array("change" => "new ShowSpvByAtm(this.value,'listCombo','select superlong','ui-widget-content-row2','ui-widget-label-row2','SPV Name');"));
+		}
+			
+		if( $out->get_value('GroupId')=='filter_by_atm_group_campaign' ) {
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+			$out->get_value('properties','strval'), 
+			$out->get_value('styles','strval'), 
+			call_user_func(array(get_class($this), $out->get_value('method','strval'))),
+			NULL, array("change" => "new ShowDataCampaignId(this.value,'listCombo','ui-widget-content-row2','ui-widget-label-row2');"));
+		}
+			
+		
+		if( $out->get_value('GroupId')=='filter_by_spv_group_campaign'){
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+			$out->get_value('properties','strval'), 
+			$out->get_value('styles','strval'), 
+			call_user_func(array(get_class($this), $out->get_value('method','strval'))),
+			NULL, array("change" => "new ShowSpvByAtm(this.value,'combo','select superlong','ui-widget-content-row2','ui-widget-label-row2','SPV Name');"));
+		}
+			
+		if( $out->get_value('GroupId')=='filter_by_agent_group_campaign'){
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+			$out->get_value('properties','strval'), 
+			$out->get_value('styles','strval'), 
+			call_user_func(array(get_class($this), $out->get_value('method','strval'))),
+			NULL, array("change" => "new ShowSpvByAtm(this.value,'combo','select superlong','ui-widget-content-row2','ui-widget-label-row2','SPV Name');"));
+		}
+			
+		if( $out->get_value('GroupId')=='filter_campaign_group_agent')
+		{
+			$this->arr_result = form()->{$out->get_value('object','strval')}(
+					$out->get_value('properties','strval'),
+					$out->get_value('styles','strval'), 
+					call_user_func(array(get_class($this), $out->get_value('method','strval'))),
+					array(),
+					array("change" => "ShowAtmByCampaign(this.value,'combo','select superlong');")
+			);
+		}
+	}
+	
+	echo $this->arr_result;
+ 
+} 
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function showCampaign()
+{
+	$obj =& get_class_instance(base_class_model($this));
+	return $obj->_getCampaignReady();
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+  public function ShowDataCampaignId() 
+{
+
+  $out = new EUI_Object( _get_all_request() ); 	
+ 
+ if(_get_have_post('UserId') ) 
+  {
+	echo form()->{$out->get_value('type')}("CampaignId", $out->get_value('Class'), $this->showCampaign());	
+  }	
+  else{
+	echo form()->combo("CampaignId",'input_text box',null);	
+ } 
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function ShowByAtm()
+{
+	$out = new EUI_Object( _get_all_request() ); 	
+	echo form()->{$out->get_value('type')}("AtmId",  $out->get_value('Class'), $this->showATM(),
+		NULL, array("change" => "Ext.DOM.ShowSpvByAtm(this.value,'combo','select superlong','ui-widget-content-row3','ui-widget-label-row3','SPV Name');"));	
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function ShowAtmByCampaign()
+{
+	
+	$out = new EUI_Object( _get_all_request() ); 	
+	if( $out->get_value('filterby') =='filter_campaign_group_spv'){
+		echo form()->{$out->get_value('type')}("AtmId",  $out->get_value('Class'), $this->showATM(),
+		NULL, array("change" => "Ext.DOM.ShowSpvByAtm(this.value,'listCombo','select superlong','ui-widget-content-row3','ui-widget-label-row3','SPV Name');"));
+	} else {
+		echo form()->{$out->get_value('type')}("AtmId",  $out->get_value('Class'), $this->showATM(),
+		NULL, array("change" => "Ext.DOM.ShowSpvByAtm(this.value,'combo','select superlong','ui-widget-content-row3','ui-widget-label-row3','SPV Name');"));
+	}	
+		
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public  function showATM() 
+{
+	$arr_list =& get_class_instance('M_SysUser');
+	return (array)$arr_list->_get_supervisor();
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ 
+ public function ShowAgentByAtm()
+{
+	
+$out = new EUI_Object( _get_all_request() ); 
+
+// ---------------- show data --------------------------
+ if( _get_have_post('AtmId') ) 
+ {
+	$obj =& get_class_instance(base_class_model($this));
+	$arr_list = (array)$obj->_getAgentByAtm($out->get_value('AtmId'));
+	
+	if( $out->get_value('type')=='listCombo') {
+		echo form()->listCombo('UserId', NULL, $arr_list );
+	}
+	else{
+		echo form()->combo('UserId', $out->get_value('Class'), $arr_list );
+	}
+ }
+  else{
+		echo form()->combo('UserId', 'select superlong', array());
+	}
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function ShowAgentBySpv()
+{
+	
+// --- call object -------------------------------------------------
+	
+ $obj =& get_class_instance(base_class_model($this));
+ $out = new EUI_Object( _get_all_request() ); 
+ //	filter_campaign_group_agent
+ if( _get_have_post('SpvId') )
+ {
+	$arr_list_spv = (array)$obj->_getAgentBySpv($out->get_value('SpvId'));
+    
+	if( $out->get_value('type')=='listCombo'){
+		echo form()->listCombo('UserId', null, $arr_list_spv );
+	}
+	else
+	{
+		if( $out->get_value('filterby')=='filter_by_agent_group_campaign'){
+			echo form()->combo('UserId', $out->get_value('Class'),$arr_list_spv, null, array("change" => "Ext.DOM.ShowDataCampaignId(this.value,'listCombo','ui-widget-content-row4','ui-widget-label-row4');") );
+		}
+		else{	
+			echo form()->combo('UserId', $out->get_value('Class'), $arr_list_spv );
+		}
+	}	
+ }
+  else{
+	echo form()->combo('UserId', 'select long', array() );
+  }
+ 
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function ShowSpvByAtm()
+{
+	
+// --- call object -------------------------------------------------
+	
+ $obj =& get_class_instance(base_class_model($this));
+ $out = new EUI_Object( _get_all_request() ); 
+
+ 
+// ----------- next ------------------------------------------
+ 
+ if( !_get_have_post('AtmId') ) {
+	//echo form()->combo('SpvId', 'select long', array());
+ }	 
+ 
+	if( _get_post('type')=='listCombo') {
+		
+		$arr_list = $obj->_getSpvByAtm($out->get_value('AtmId') );
+		if( count($arr_list) !=0 ){
+			echo form()->listCombo('SpvId', null,  $arr_list);
+		} else {
+			echo form()->combo('SpvId', 'select superlong',  $arr_list);
+		}
+	}
+	else 
+	{
+		if( _get_post('filterby')=='filter_by_agent') {
+			echo form()->combo('SpvId', _get_post('Class'), $obj->_getSpvByAtm($out->get_value('AtmId')), null, array('change' => "Ext.DOM.ShowAgentBySpvId(this.value,'listCombo','null','ui-widget-content-row3','ui-widget-label-row3','TSR Name');") );
+		}
+		else if( _get_post('filterby')=='filter_by_spv_group_campaign') {
+			echo form()->combo('SpvId', _get_post('Class'), $obj->_getSpvByAtm($out->get_value('AtmId')), null, array('change' => "Ext.DOM.ShowDataCampaignId(this.value,'listCombo','ui-widget-content-row3','ui-widget-label-row3');") );
+		}
+		else if( _get_post('filterby')=='filter_by_agent_group_campaign') 
+		{
+			echo form()->combo('SpvId', _get_post('Class'), $obj->_getSpvByAtm($out->get_value('AtmId')), null, array('change' => "Ext.DOM.ShowAgentBySpvId(this.value,'combo','select auto','ui-widget-content-row3','ui-widget-label-row3','TSR Name');"));
+		}
+		else if( _get_post('filterby')=='filter_campaign_group_agent') {
+			echo form()->combo('SpvId', _get_post('Class'), $obj->_getSpvByAtm($out->get_value('AtmId')), null, array('change' => "Ext.DOM.ShowAgentBySpvId(this.value,'listCombo','select auto','ui-widget-content-row4','ui-widget-label-row4','TSR Name');"));
+		}
+		else{
+			echo form()->combo('SpvId', _get_post('Class'), $obj->_getSpvByAtm($out->get_value('AtmId')));
+		}	
+	}
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function setHedaerStyles( $line = null )
+{
+ 
+ $out = new EUI_Object( _get_all_request() ); 
+ $CSS['first']  = array( 'html' => 'header first', 'excel' => 'xl6715526');
+ $CSS['middle'] = array( 'html' => 'header middle','excel' => 'xl6715526');
+ return $CSS[$line][$out->get_value('mode','strtolower')]; 
+ 
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function setContentStyles( $line = null )
+{
+  $out = new EUI_Object( _get_all_request() );
+  $CSS['first']  = array( 'html' => 'content first left', 'excel' => 'xl6515526');
+  $CSS['middle'] = array( 'html' => 'content middle right','excel' => 'xl6515526');
+  return $CSS[$line][$out->get_value('mode','strtolower')]; 
+}
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+public function setBottomStyles( $line = null )
+{
+  $out = new EUI_Object( _get_all_request() );
+  $CSS['first']  = array( 'html' => 'total first right', 'excel' => 'xl6615526');
+  $CSS['middle'] = array( 'html' => 'total middle right','excel' => 'xl6615526');
+  return $CSS[$line][$out->get_value('mode','strtolower')]; 
+}
+
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ 
+ public function ShowExcel()
+{
+	Excel()->HTML_Excel(get_class($this).''.time());
+	
+	if( is_array($this->R_Model ) 
+		AND !empty($this->FilterGroupBy) )
+	{
+		$objCls = new EUI_Object( $this->R_Model[$this->FilterGroupBy]);
+		
+		if( !$objCls->fetch_ready() ) {
+			exit(0);
+		}
+		
+		$this->load->report($objCls->get_value('class'));
+		if( !class_exists( $objCls->get_value('class'))){
+			exit("object : {$objCls->get_value('class')} doesn't exist");
+		}
+		
+	// -------------- cek validation data sent to model ------------------------------------ 
+	
+		$arr_class_object = $this->{$objCls->get_value('class')}->_select_row_data_report(); 
+		if( is_array($arr_class_object) 
+			AND count($arr_class_object) == 0  ) {
+			exit('Parameter is wrong');
+		}
+		$this->load->view("mod_view_tracking/{$arr_class_object['call_viewer']}",$arr_class_object);
+				
+	}
+ 
+ }
+ 
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+  public function showHTML() 
+ {
+	if( is_array($this->R_Model ) 
+		AND !empty($this->FilterGroupBy) )
+	{
+		$objCls = new EUI_Object( $this->R_Model[$this->FilterGroupBy]);
+		if(!$objCls->fetch_ready() ) {
+			exit(0);
+		}
+		
+	// ------------- active here --------------------------
+		$this->load->report( $objCls->get_value('class'));
+		if( !class_exists( $objCls->get_value('class'))){
+			exit("object : {$objCls->get_value('class')} doesn't exist");
+		}
+	// -------------- cek validation data sent to model ------------------------------------ 
+		
+		$arr_class_object = $this->{$objCls->get_value('class')}->_select_row_data_report(); 
+		if( is_array($arr_class_object) 
+			AND count($arr_class_object) == 0  ) {
+			exit('Parameter is wrong');
+		}
+		$this->load->view("mod_view_tracking/{$arr_class_object['call_viewer']}",$arr_class_object);
+		
+	}
+ }
+ 
+ 
+ 
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function ShowReport()
+{
+	
+ $out = new EUI_Object( _get_all_request() );	
+ if( $out->get_value('mode','strtolower') == 'html' ) {
+	$this->showHTML(); 
+ }	
+ 
+ if( $out->get_value('mode','strtolower') == 'excel' )  {
+	$this->ShowExcel(); 
+ }
+ 
+}
+ 
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function _POST()
+ {
+	$_reqs = array(); $filter = array('AgentId');
+	
+	$param =  $this -> URI -> _get_all_request();
+	foreach( $param as $keys => $values ) 
+	{ 
+		if( in_array($keys, $filter) ){
+			$_reqs[$keys] = $this -> URI->_get_array_post($keys);
+		}
+		else{
+			$_reqs[$keys] = $values;
+		}
+	}
+
+	return $_reqs; 	
+ }
+ 
+
+//---------------------------------------------------------------------------------------
+
+/* properties		index 
+ *
+ * @param 			uknown 
+ * @author			uknown 
+ */
+ public function _AGENT()
+ {
+	$_reqs = array(); 
+	$filter = array('AgentId');
+	
+	$UserAgents = $this -> URI->_get_array_post('AgentId');
+	foreach($UserAgents as $k => $v )
+	{
+		$_reqs[$v] = $this ->M_Report->_getAgentName($v); 	
+	}
+return $_reqs; 	
+ }
+ 
+}
+?>

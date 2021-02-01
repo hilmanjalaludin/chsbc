@@ -1,0 +1,85 @@
+/* default styles
+------------------------------------------ */
+   
+html{ background-color: #FFFFFF; }
+a {	color: #0694B3;	}
+a:hover { color:#f69233; }
+
+
+/* ui-li-ext-toolbar text context */
+
+.ui-li-ext-toolbar { color: #f69233;}
+.ui-li-ext-toolbar:hover{ color: #FF4321;}
+
+/* on welcome text window 
+------------------------------------------*/
+ 
+.ui-widget-default-home {white-space: normal; min-width:320px; border:1px solid #dddddd;height:80px; padding:20px 0px 20px 0px; margin:5px 15px 5px -40px; border-radius:3px;  background: #ffffff url(../../../../library/gambar/instruction.gif) no-repeat right; color: #0694B3; font-family:Trebuchet MS;  font-size:16px; }
+.ui-widget-default-welcome { white-space: normal; min-width:320px; border:1px solid #dddddd; margin:5px; border-radius:3px; }
+.ui-widget-default-welcome p {white-space: normal; min-width:320px; margin:5px;font-family:Trebuchet MS;}
+.ui-widget-default-welcome li {white-space: normal; min-width:320px; font-family:Trebuchet MS; margin: 5px auto;}
+.ui-widget-default-welcome strong { white-space: normal; font-size:12px;}
+.ui-welcome-home { white-space: normal;min-width:320px; margin-left: -8px;}
+
+/* oment - spiner class plugin of jquery */
+
+.ui-widget-ajax-spiner { vertical-align:center; text-align:center; float:center; height:100%; width:100%; background: #FFFFFF url(../../../../library/gambar/main-content-ajax-loader.gif)  50% 50%  no-repeat; opacity: 0.80; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 80); filter: alpha(opacity = 80); }
+.ui-widget-ajax-spiner-min { vertical-align:center; text-align:center; float:left; height:100%; width:100%; background: #FFFFFF url(../../../../library/gambar/loading.gif)  50% 50%  no-repeat; background-size:16px 16px; opacity: 0.80; -ms-filter: progid:DXImageTransform.Microsoft.Alpha(Opacity = 80); filter: alpha(opacity = 80); }
+
+
+/* on welcome text window 
+ ------------------------------------------*/
+
+#main_content {font-size: 11px; background-color: #FFFFFF }
+#foot { font-size: 1.1em; line-height: 2.8em; height: 36px; text-align: center; border:1px dotted #808080; position:absolute; bottom:0; width: 99.8%; overflow:auto; }
+#accordion { padding: 4px; width: 190px; }
+#accordions { padding:0px 4px 4px 4px; width: 190px; }
+#split {height:280px; width:200px; border:1px dotted #999;margin-top : 5px; overflow:auto; }
+
+/* on welcome text window 
+ ------------------------------------------*/
+.menu {}
+.menu ul, .menu ul li { display: inline; font-size: 1em; text-align: center; line-height: 25px; list-style-type: none; margin:0; padding:0; }
+.menu ul {height:25px;}
+.menu ul li a { display: block; background:transparent url(../../../../images/menu_bg.png) no-repeat scroll center bottom; color:#aaaaaa; height:25px; text-decoration:none; }
+.menu ul li.selected a { color:#ff6600; background:transparent url(../images/menu_bg_hover.png) no-repeat scroll center bottom; }
+.menu ul li.last a {background: none;}
+.menu ul li a:hover { color:#ff6600; background:transparent url(../../../../images/menu_bg_hover.png) no-repeat scroll center bottom; }
+.menu ul li.last a:hover { color:#ff6600; background: none; }
+
+/* on welcome text window 
+ ------------------------------------------*/
+ 
+.top_logo { padding: 2px 0 2px 0; color: #808080; float: left; }
+.top_logo_left { float: left; }
+.top_logo_right { padding: 0 0 0 35px; float: right; }
+.top_info { width: 555px; padding: 2px 0 2px 0; color: #808080; float: right; }
+.top_info_left { width: 250px; float: left; }
+.top_info_right { width: 290px; padding: 0 0 0 0; float: right; }
+
+/* on welcome text window 
+ ------------------------------------------*/
+ 
+.content_table {  color: #076B81; padding : 8px 5px 8px 5px; margin: 1px 0px 1px 0px; }
+.list_table { background: #f5f5f5; color: #076B81; padding: 0 0 0 0;	 margin: 0 0 0 0; }
+.clearfix:after { content:"."; display:block; height:0; clear:both; visibility:hidden; }
+.clearfix {display:inline-block;}
+* html .clearfix { height:1%; }
+.clearfix {display:block;}
+.chatLine{border-bottom:1px dotted blue;padding:5px;}
+#accordion { border:0px solid #000;width:200px;}
+p span {font-size:12px;}
+#purr-container { position: fixed; float: left; top: 0; position: fixed; z-index: 9999 !important; }
+
+/* on welcome text window 
+ ------------------------------------------*/
+
+.notice {position: relative;width: 324px;}
+.notice .close{position: absolute; top: 12px; right: 12px; display: block; width: 18px; height: 17px; text-indent: -9999px; background: url(../../../../library/gambar/purrClose.png) no-repeat 0 10px;}
+.notice-body {min-height: 50px;padding: 22px 22px 0 22px;background: url(../../../../library/gambar/purrTop.png) no-repeat left top;color: #f9f9f9;}
+.notice-body img {width: 50px; margin: 0 10px 0 0; float: left;}
+.notice-body h3 {margin: 0; font-size: 1.1em;}
+.notice-body p {margin: 5px 0 0 60px; font-size: 0.8em; line-height: 1.4em;}
+.notice-bottom {height: 22px;background: url(../../../../library/gambar/purrBottom.png) no-repeat left top;}
+h3 a {font-size:12px;color:#FFF}
+h3 a:hover {font-size:12px;color:#FFF}

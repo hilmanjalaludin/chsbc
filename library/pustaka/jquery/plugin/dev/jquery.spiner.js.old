@@ -1,0 +1,100 @@
+// -------------------------------------------------------------------------------------
+/*
+ * @ package 	 plugin $.fn.Spiner loding data on posted 
+ * @ author 	 uknown definition 
+ 
+ */
+ 
+;(function( $ )
+{
+	if( typeof( $.fn.Spiner ) != 'function' )
+	{
+		$.fn.Spiner = function( data ) 
+		{
+			var UrlParams = { }, 
+				UrlWindow = ( typeof( data.url ) =='object' ? Ext.EventUrl( data.url ).Apply() : data.url );
+			
+			if( typeof( data ) == 'object' ) 
+			{
+			// ------------ restructure object data -----------------	
+				if( typeof data.param  == 'object' ){
+					for( var v in data.param ){
+						UrlParams[v] = data.param[v];
+					}	
+				}	
+				if( typeof data.order  == 'object' ){
+					UrlParams['orderby'] = ( data.order.order_by != 'undefined' ? data.order.order_by : '' ) ;
+					UrlParams['type'] = ( data.order.order_type != 'undefined' ? data.order.order_type : '' ) ;
+					UrlParams['page'] = ( data.order.order_page != 'undefined' ? data.order.order_page : '' ) ;
+				}
+				
+			// ----------- execute posted ajax url ----------------------
+				var _call_func =  ( ( data.complete !=='undefined' && typeof ( data.complete ) == 'function') ? data.complete : '');
+				
+				$(this).html("");
+				$(this).css("height", "120px");
+				$(this).addClass("ui-widget-ajax-spiner"); 
+				$(this).load( UrlWindow, UrlParams, 
+					function( response, status, xhr ) {
+						if( status == 'success' ){
+							if( typeof(_call_func)== 'function'){
+								_call_func( $(this) );
+							}	
+						}	
+						$(this).removeClass("ui-widget-ajax-spiner");
+						if( status == 'error') { 
+							$(this).html('Error 404');	 
+						}		
+					}
+				); 	
+			}
+		}
+
+		$.fn.loader = function( data ) 
+		{
+			var UrlParams = { }, 
+				UrlWindow = ( typeof( data.url ) =='object' ? Ext.EventUrl( data.url ).Apply() : data.url );
+			
+			if( typeof( data ) == 'object' ) 
+			{
+			// ------------ restructure object data -----------------	
+				if( typeof data.param  == 'object' ){
+					for( var v in data.param ){
+						UrlParams[v] = data.param[v];
+					}	
+				}	
+				if( typeof data.order  == 'object' ){
+					UrlParams['orderby'] = ( data.order.order_by != 'undefined' ? data.order.order_by : '' ) ;
+					UrlParams['type'] = ( data.order.order_type != 'undefined' ? data.order.order_type : '' ) ;
+					UrlParams['page'] = ( data.order.order_page != 'undefined' ? data.order.order_page : '' ) ;
+				}
+				
+			// ----------- execute posted ajax url ----------------------
+				var _call_func =  ( ( data.complete !=='undefined' && typeof ( data.complete ) == 'function') ? data.complete : '');
+				
+				$(this).html("");
+				$(this).css("height", "50px");
+				$(this).addClass("ui-widget-ajax-spiner-min"); 
+				$(this).load( UrlWindow, UrlParams, 
+					 function( response, status, xhr ) 
+					{
+						if( status == 'success' ){
+							$(this).removeClass("ui-widget-ajax-spiner-min");	
+							if( typeof(_call_func)== 'function'){
+								_call_func( $(this) );
+							}	
+						}	
+						if( status == 'error') { 
+							$(this).removeClass("ui-widget-ajax-spiner-min");
+							$(this).html('Error 404');	 
+						}
+						$(this).removeClass("ui-widget-ajax-spiner-min");	
+					}
+				); 	
+			}
+		}	
+	}	
+	
+	
+})( jQuery );
+ 

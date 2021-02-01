@@ -1,0 +1,180 @@
+/* CSS style */
+
+body{
+ margin:0; padding:0; height:100%;
+ background: url('../../../../library/styles/launcher/images/header_bg.png');
+ margin-top:0px;
+ margin-bottom:0px;
+ height:'100%';
+ margin-left:0px;
+ margin-right:0px;
+}
+
+.ui-widget-title-welcome{  
+	font-size:18px; text-shadow: 1px 4px 1px #eeeddd;  margin-top:-20px;color:#DA8484;
+}
+
+.inputtext{
+	font-family:Trebuchet MS;
+	font-size:12px;
+	height:22px;
+	color:blue;
+}
+
+
+.mainbody{
+	background-image:url(../images/Untitled-1.png);
+	border:0px solid #ddd;
+	width:300px;
+	height:200px;
+	position: absolute;
+	left:470;
+	top:200;
+	color:blue;
+	vertical-align: middle;
+	text-align:center;
+}
+
+table td {
+	font-family: Verdana, Arial, sans-serif;
+	height:30px;
+	color :blue;
+	font-size:12px;
+	height:30px;
+	
+}
+
+
+.login-images {
+	margin-left:0px;
+	margin-top:100px;
+}
+
+.bottom-text-result{
+    font-family:Trebuchet MS;
+	color:red;
+	font-size:14px;
+	border:0px solid #ddd;
+	position: absolute;
+	left:500;
+	top:400;
+}
+
+/***********/
+
+.formHeaderLogin
+{
+	color: #13840A;
+  font-size: 12pt;	
+	font-weight: bold;
+  padding: 15px;
+	text-align: left;
+	vertical-align: bottom;
+}
+
+.formTitleLogin
+{
+	color: #666666;
+  font-size: 12pt;	
+	font-weight: bold;
+  padding: 15px;	
+}
+
+
+.tableFormLogin
+{
+  background-color: #EDF8FC;
+  border: 1px solid #00A4DE;
+  padding: 5px;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+#tblLoginContainer
+{
+ margin-top:100px;
+  border: 1px solid #00A4DE;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+  -webkit-border-radius: 10px;
+}
+
+.tdBtnCommon
+{
+	padding-bottom: 15px;
+  padding-top: 15px;
+  text-align: center;    
+}
+
+.buttonCommon
+{
+	background-color: #13840A;
+  color: white;
+	font-size: 10pt;
+  font-weight: bold;
+	padding: 3px;
+	text-align: center;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+
+/* #00A4DE: Light Blue */
+/* #FF3300: Orange     */
+.buttonCommon:hover
+{
+  background-color: #FF3300;
+  color: white;
+  cursor: pointer;
+	font-size: 10pt;
+  font-weight: bold;
+	padding: 3px;
+	text-align: center;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+
+/* #999999: Dark Gray */
+.buttonCommonDisabled
+{
+  background-color: #999999;
+  color: white;
+	font-size: 10pt;
+  font-weight: bold;
+	padding: 3px;
+	text-align: center;
+  border-radius: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+}
+
+.textBoxLogin
+{
+ 	color: #0066CC;
+  border-color: #CCCCCC;
+  border-style: solid;
+	border-width: 1pt;
+  font-size: 10pt;
+  height: 20px;
+  padding-left: 2px;
+  width: 150px
+}
+
+.formRowRightLogin
+{
+	color: #666666;
+  font-size: 10pt; 
+	font-weight: normal;
+  padding-right: 5pt;
+  text-align: right;
+	vertical-align: middle;
+}
+
+.textErrorMsg
+{
+    color: #AA0000;
+    font-size: 10pt;
+    font-weight: bold;
+}
