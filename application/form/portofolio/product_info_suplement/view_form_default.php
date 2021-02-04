@@ -115,7 +115,7 @@
 		}
 	}
 
-	var isFullname = false, isNameOnCard = false, isNoIdentificationType = false, isDob = false
+	var isFullname = false, isNameOnCard = false, isNoIdentificationType = false, nama = false, isDob = false
 
 	Ext.DOM.validateFullname = function (input) {
 		if(input.value.length > 33) {
@@ -162,6 +162,45 @@
 		}
 	}
 
+	Ext.DOM.validateNama = function() {
+		var namDep = document.getElementById('namaDepan').value
+		var namTeng = document.getElementById('namaTengah').value
+		var namBel = document.getElementById('namaBelakang').value
+		if(namDep != '' &&  namTeng != '' && namBel != '') {
+			document.getElementById('warningNama').innerHTML = ''
+			document.getElementById('warningNama').style.display = 'none'
+			nama = true
+		} else if(namDep != '' &&  namBel != ''){
+			document.getElementById('warningNama').innerHTML = ''
+			document.getElementById('warningNama').style.display = 'none'
+			nama = true
+		} else if(namTeng != '' && namBel != '') {
+			document.getElementById('warningNama').innerHTML = 'Nama depan harus diisi !'
+			document.getElementById('warningNama').style.display = 'block'
+			nama = false
+		} else if(namDep != '' && namTeng != '') {
+			document.getElementById('warningNama').innerHTML = 'Nama belakang harus diisi !'
+			document.getElementById('warningNama').style.display = 'block'
+			nama = false
+		} else if (namDep != '') {
+			document.getElementById('warningNama').innerHTML = ''
+			document.getElementById('warningNama').style.display = 'none'
+			nama = true
+		} else if(namTeng != '') {
+			document.getElementById('warningNama').innerHTML = 'Nama depan dan belakang harus diisi !'
+			document.getElementById('warningNama').style.display = 'block'
+			nama = false
+		} else if (namBel != '') {
+			document.getElementById('warningNama').innerHTML = 'Nama depan harus diisi !'
+			document.getElementById('warningNama').style.display = 'block'
+			nama = false
+		} else {
+			document.getElementById('warningNama').innerHTML = 'Nama depan harus diisi !'
+			document.getElementById('warningNama').style.display = 'block'
+			nama = false
+		}
+	}
+
 	Ext.DOM.validateDob = function (input) {
 		var split = input.value.split('-');
 		var res = split[1]+'/'+split[0]+'/'+split[2];
@@ -180,73 +219,6 @@
 		}
 		document.getElementById('warningDob').innerHTML = warning;
 		document.getElementById('warningDob').style.color = 'red';
-	}
-
-	var isFullname2 = true, isNameOnCard2 = false, isNoIdentificationType2 = true, isDob2 = true
-
-	Ext.DOM.validateFullname2 = function (input) {
-		if(input.value.length > 33) {
-			document.getElementById('warningFullname2').innerHTML = 'Nama lengkap tanpa singkatan maksimal 33 karakter'
-			document.getElementById('warningFullname2').style.color = 'red'
-			isFullname2 = false
-		} else {
-			document.getElementById('warningFullname2').innerHTML = null
-			document.getElementById('warningFullname2').style.color = ''
-			isFullname2 = true
-		}
-	}
-
-	Ext.DOM.validateNameOnCard2 = function (input) {
-		if(input.value.length > 19) {
-			document.getElementById('warningNameOnCard2').innerHTML = 'Name on card maksimal 19 karakter'
-			document.getElementById('warningNameOnCard2').style.color = 'red'
-			isNameOnCard2 = false
-		} else {
-			document.getElementById('warningNameOnCard2').innerHTML = null
-			document.getElementById('warningNameOnCard2').style.color = ''
-			isNameOnCard2 = true
-		}
-	}
-
-	Ext.DOM.validateIdentificationType2 = function (select) {
-		if(select.value != 4) {
-			alert('Kartu harus KTP')
-			document.getElementById('identificationType').value=4;
-		} else {
-			return
-		}
-	}
-
-	Ext.DOM.validateNoIdentificationType2 = function (input) {
-		if(input.value.length != 16) {
-			document.getElementById('warningNoIdentificationType2').innerHTML = 'No Ktp maksimal 16 karakter'
-			document.getElementById('warningNoIdentificationType2').style.color = 'red'
-			isNoIdentificationType2 = false
-		} else {
-			document.getElementById('warningNoIdentificationType2').innerHTML = null
-			document.getElementById('warningNoIdentificationType2').style.color = ''
-			isNoIdentificationType2 = true
-		}
-	}
-
-	Ext.DOM.validateDob2 = function (input) {
-		var split = input.value.split('-');
-		var res = split[1]+'/'+split[0]+'/'+split[2];
-		var date1 = new Date(res);
-		var date2 = new Date();
-		var diffTime = Math.abs(date2 - date1);
-		var diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-		var diffYear = diffDays / 365;
-		var warning;
-		if(diffYear < 17) {
-			warning = 'Umur minimal 17 tahun';
-			isDob2 = false;
-		} else {
-			warning = '';
-			isDob2 = true;
-		}
-		document.getElementById('warningDob2').innerHTML = warning;
-		document.getElementById('warningDob2').style.color = 'red';
 	}
 
 	Ext.DOM.validateMandatory = function (noKtp, namaDepan, fullname, nameOnCard, formerName, pob, dob, mmn, addessSup, phone, resPhone, email, salutation, nationality, cob, gender, maritalStatus, relationship, occupation) {
@@ -364,6 +336,8 @@
 				alert('No Ktp maksimal 16 karakter');
 			} else if(!isDob) {
 				alert('Umur minimal 17 tahun');
+			} else if(!nama) {
+				alert(document.getElementById('warningNama').innerHTML);
 			} else {
 				if(Ext.Cmp('identificationType').getValue() != 4) {
 					alert('Kartu harus KTP')
@@ -392,7 +366,6 @@
 							maritalStatus: Ext.Cmp('maritalStatus').getValue(),
 							mmn: Ext.Cmp('mmn').getValue(),
 							occupation: Ext.Cmp('occupation').getValue(),
-							addressQuestion: Ext.Cmp('addressQuestion').getValue(),
 							addressSuplement: Ext.Cmp('addressSuplement').getValue(),
 							relationship: Ext.Cmp('relationship').getValue(),
 							nationality: Ext.Cmp('nationality').getValue(),
@@ -404,7 +377,6 @@
 							residentPhone: Ext.Cmp('residentPhone').getValue(),
 							email: Ext.Cmp('emailPi').getValue(),
 							residentArea: Ext.Cmp('residentArea').getValue(),
-							sendAddress: Ext.Cmp('sendAddress').getValue(),
 						},
 						ERROR	: function(fn){
 							Ext.Util(fn).proc(function(result){
@@ -445,9 +417,6 @@
 				ERROR	: function(fn){
 					Ext.Util(fn).proc(function(result){
 						if(result.data){
-							if(result.data.addressQuestion == 1) {
-								document.getElementById('sendAddress').disabled = false
-							}
 							document.getElementById('wrap-update').style.display = 'block'
 							document.getElementById('wrap-save').style.display = 'none'
 							document.getElementById('wrap-tnc').style.display = 'none'
@@ -467,7 +436,6 @@
 							document.getElementById('maritalStatus').value = result.data.maritalStatus
 							document.getElementById('mmn').value = result.data.mmn
 							document.getElementById('occupation').value = result.data.occupation
-							document.getElementById('addressQuestion').value = result.data.addressQuestion
 							document.getElementById('addressSuplement').value = result.data.addressSuplement
 							document.getElementById('relationship').value = result.data.relationship
 							document.getElementById('nationality').value = result.data.nationality
@@ -478,8 +446,7 @@
 							document.getElementById('mobilePhoneNo').value = result.data.mobilePhoneNo
 							document.getElementById('residentPhone').value = result.data.residentPhone
 							document.getElementById('emailPi').value = result.data.email
-							document.getElementById('residentArea').value = result.data.residentArea,
-							document.getElementById('sendAddress').value = result.data.sendAddress
+							document.getElementById('residentArea').value = result.data.residentArea
 						}else{
 							document.getElementById('wrap-update').style.display = 'none'
 						}
@@ -492,8 +459,8 @@
 	}
 
 	Ext.DOM.updateProductInfoSuplement = function () {
-		// var valMandatory = Ext.DOM.validateMandatory(Ext.Cmp('NoIdentificationType').getValue(), Ext.Cmp('namaDepan').getValue(), Ext.Cmp('fullname').getValue(), Ext.Cmp('nameOnCard').getValue(), Ext.Cmp('formerName').getValue(), Ext.Cmp('pob').getValue(), Ext.Cmp('dob').getValue(), Ext.Cmp('mmn').getValue(), Ext.Cmp('addressSuplement').getValue(), Ext.Cmp('mobilePhoneNo').getValue(), Ext.Cmp('residentPhone').getValue(), Ext.Cmp('emailPi').getValue(), Ext.Cmp('salutation').getValue(), Ext.Cmp('nationality').getValue(), Ext.Cmp('cob').getValue(), Ext.Cmp('gender').getValue(), Ext.Cmp('maritalStatus').getValue(), Ext.Cmp('relationship').getValue(), Ext.Cmp('occupation').getValue());
-		// if(valMandatory.status == 1) {
+		var valMandatory = Ext.DOM.validateMandatory(Ext.Cmp('NoIdentificationType').getValue(), Ext.Cmp('namaDepan').getValue(), Ext.Cmp('fullname').getValue(), Ext.Cmp('nameOnCard').getValue(), Ext.Cmp('formerName').getValue(), Ext.Cmp('pob').getValue(), Ext.Cmp('dob').getValue(), Ext.Cmp('mmn').getValue(), Ext.Cmp('addressSuplement').getValue(), Ext.Cmp('mobilePhoneNo').getValue(), Ext.Cmp('residentPhone').getValue(), Ext.Cmp('emailPi').getValue(), Ext.Cmp('salutation').getValue(), Ext.Cmp('nationality').getValue(), Ext.Cmp('cob').getValue(), Ext.Cmp('gender').getValue(), Ext.Cmp('maritalStatus').getValue(), Ext.Cmp('relationship').getValue(), Ext.Cmp('occupation').getValue());
+		if(valMandatory.status == 1) {
 			// if(!isFullname) {
 			// 	alert('Nama lengkap tanpa singkatan maksimal 33 karakter');
 			// } else if(!isNoIdentificationType) {
@@ -525,7 +492,6 @@
 							maritalStatus: Ext.Cmp('maritalStatus').getValue(),
 							mmn: Ext.Cmp('mmn').getValue(),
 							occupation: Ext.Cmp('occupation').getValue(),
-							addressQuestion: Ext.Cmp('addressQuestion').getValue(),
 							addressSuplement: Ext.Cmp('addressSuplement').getValue(),
 							relationship: Ext.Cmp('relationship').getValue(),
 							nationality: Ext.Cmp('nationality').getValue(),
@@ -537,7 +503,6 @@
 							residentPhone: Ext.Cmp('residentPhone').getValue(),
 							email: Ext.Cmp('emailPi').getValue(),
 							residentArea: Ext.Cmp('residentArea').getValue(),
-							sendAddress: Ext.Cmp('sendAddress').getValue(),
 						},
 						ERROR	: function(fn){
 							Ext.Util(fn).proc(function(result){
@@ -556,9 +521,9 @@
 					}).post();
 				}
 			// }
-		// } else {
-		// 	alert('ga okeee')
-		// }
+		} else {
+			alert('ga okeee')
+		}
 	}
 
 	Ext.DOM.cancelSave = function () {
@@ -569,6 +534,7 @@
 
 	Ext.DOM.clearInput = function () {
 		document.getElementById('formProductInfo1').reset()
+		document.getElementById('wrap-update').style.display = 'none'
 	}
 	
 	Ext.DOM.addressQuestions = function(choose) {
@@ -875,7 +841,7 @@
 					// echo form()->input("NoIdentificationType", "select  tolong", null,null,array("change"=>""));
 				?>
 				<?php echo form()->hidden('idSuplement',NULL, NULL);?>
-				<input type="text" class="select  tolong" name="NoIdentificationType" id="NoIdentificationType" oninput="Ext.DOM.validateNoIdentificationType(this)">
+				<input type="text" class="select  tolong" name="NoIdentificationType" id="NoIdentificationType" placeholder="No Identity" oninput="Ext.DOM.validateNoIdentificationType(this)">
 				<small id="warningNoIdentificationType"></small>
 			</div>
 		</div>
@@ -888,13 +854,20 @@
 					<option value="">--- choose ---</option>
 					<?php
 						foreach($salutation as $item){
-							echo '<option value="'.$item['SalutationCode'].'">'.$item['Salutation'].'</option>';
+							echo '<option value="'.$item['Salutation'].'">'.$item['Salutation'].'</option>';
 						}
 					?>
 				</select>
-				<?php echo form()->input("namaDepan", "select  tolong", null,null,array("change"=>""));?>
-				<?php echo form()->input("namaTengah", "select  tolong", null,null,array("change"=>""));?>
-				<?php echo form()->input("namaBelakang", "select  tolong", null,null,array("change"=>""));?>
+				<?php
+					// echo form()->input("namaDepan", "select  tolong", null,null,array("change"=>""));
+					// echo form()->input("namaTengah", "select  tolong", null,null,array("change"=>""));
+					// echo form()->input("namaBelakang", "select  tolong", null,null,array("change"=>""));
+				?>
+				<input type="text" class="select  tolong" name="namaDepan" id="namaDepan" placeholder="Nama Depan" oninput="Ext.DOM.validateNama()"/>
+				<input type="text" class="select  tolong" name="namaTengah" id="namaTengah" placeholder="Nama Tengah" oninput="Ext.DOM.validateNama()"/>
+				<input type="text" class="select  tolong" name="namaBelakang" id="namaBelakang" placeholder="Nama Belakang" oninput="Ext.DOM.validateNama()" />
+				<br/>
+				<small id="warningNama" style="color: red; display: none"></small>
 			</div>
 		</div>
 		

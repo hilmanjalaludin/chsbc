@@ -173,8 +173,8 @@ private function _getFileName()
  */
 
 function UploadBucket()
-{	 
-	// #var_dump( "DEBUG"); die();
+{
+	// var_dump( "DEBUG"); die();
   // pre define all object variable on modul bucket upload 
   // for properies .
   $this->success 	= 1;  
@@ -205,7 +205,7 @@ function UploadBucket()
 	   printf('%s', json_encode( $this->callbackMsg) );
 	   return FALSE;
    }
-   
+
  
   // panggil modul template untuk process cek file 
   // berdasarkan template .
@@ -275,6 +275,7 @@ function UploadBucket()
 	// ketable yang dimaksud.
 // 	$this->upl =& Singgleton('M_Upload');
 //   $this->tpl =& Singgleton('M_Template');
+
 	if(!strcmp( $this->tpm, 'INSERT')) {
 		// echo "masuk sini";
 		// die;

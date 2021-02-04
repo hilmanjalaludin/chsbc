@@ -1482,10 +1482,10 @@ Ext.DOM.getToSecondProducts = function(disagreeid = null,campaignid = null)
 }
 
 $(document).ready( function() {
-	var stat = '<?php echo $ver_res_stat;?>';
-	if(stat == null || +stat != 1) {
-		$("#tabs").mytab().tabs({ selected : 0, disabled:[3]});
-	}
+	// var stat = '<?php echo $ver_res_stat;?>';
+	// if(stat == null || +stat != 1) {
+	// 	$("#tabs").mytab().tabs({ selected : 0, disabled:[3]});
+	// }
 //edit irul
 $("#CallResult option[value='9']").remove();
 $("#CallResult_2nd option[value='9']").remove();

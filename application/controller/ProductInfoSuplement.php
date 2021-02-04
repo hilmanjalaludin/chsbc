@@ -12,11 +12,12 @@ class ProductInfoSuplement extends EUI_Controller
 	{		
 		
 		$this->load->form('product_info_suplement/view_form_default',array(
+		// $this->load->form('product_info_balcon/view_form_default',array(
 			'param'		=> $this->URI->_get_all_request(),
 			'result'	=> $this->{base_class_model($this)}->_get_data_form(_get_post('CustomerId')),
 			'loans'		=> $this->{base_class_model($this)}->_get_data_loans(_get_post('CustomerId')),
             'frm'		=> $this->{base_class_model($this)}->_get_data_inc_frm(_get_post('CustomerId')),
-            
+            'stat'		=> $this->{base_class_model($this)}->_get_ver_result(_get_post('CustomerId')),
             'IdentificationType' => $this->{base_class_model($this)}->getIdentificationType(), 
             'salutation' => $this->{base_class_model($this)}->getSalutation(),
             'gender' => $this->{base_class_model($this)}->getGender(),

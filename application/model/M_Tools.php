@@ -64,7 +64,8 @@ class M_Tools extends EUI_Model
 				"duedate",
 				"Expire_dt",
 				"end_tele",
-				"Phone1"
+				"Phone1",
+				"sex",
 			);
 		}
 		

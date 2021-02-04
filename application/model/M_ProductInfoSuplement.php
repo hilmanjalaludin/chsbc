@@ -308,7 +308,7 @@ class M_ProductInfoSuplement extends EUI_Model
 		   
 			$this->db->set('identificationType'	,$out->get_value('identificationType','strtoupper')); 
 			$this->db->set('NoIdentificationType'	,$out->get_value('NoIdentificationType','strtoupper')); 
-			$this->db->set('salutation'	,$out->get_value('salutation','strtoupper'));
+			$this->db->set('salutation'	,$out->get_value('salutation'));
 			$this->db->set('namaDepan'	,$out->get_value('namaDepan','strtoupper'));
 			$this->db->set('namaTengah'		,$out->get_value('namaTengah','strtoupper'));
 			$this->db->set('namaBelakang'		,$out->get_value('namaBelakang','strtoupper'));
@@ -429,7 +429,7 @@ class M_ProductInfoSuplement extends EUI_Model
        
 		$this->db->set('identificationType'	,$out->get_value('identificationType','strtoupper')); 
 		$this->db->set('NoIdentificationType'	,$out->get_value('NoIdentificationType','strtoupper')); 
-		$this->db->set('salutation'	,$out->get_value('salutation','strtoupper'));
+		$this->db->set('salutation'	,$out->get_value('salutation'));
 		$this->db->set('namaDepan'	,$out->get_value('namaDepan','strtoupper'));
 		$this->db->set('namaTengah'		,$out->get_value('namaTengah','strtoupper'));
 		$this->db->set('namaBelakang'		,$out->get_value('namaBelakang','strtoupper'));
@@ -494,7 +494,7 @@ class M_ProductInfoSuplement extends EUI_Model
 		   
 			$this->db->set('identificationType'	,$out->get_value('identificationType','strtoupper')); 
 			$this->db->set('NoIdentificationType'	,$out->get_value('NoIdentificationType','strtoupper')); 
-			$this->db->set('salutation'	,$out->get_value('salutation','strtoupper'));
+			$this->db->set('salutation'	,$out->get_value('salutation'));
 			$this->db->set('namaDepan'	,$out->get_value('namaDepan','strtoupper'));
 			$this->db->set('namaTengah'		,$out->get_value('namaTengah','strtoupper'));
 			$this->db->set('namaBelakang'		,$out->get_value('namaBelakang','strtoupper'));

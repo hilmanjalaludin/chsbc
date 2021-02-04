@@ -667,40 +667,41 @@ class M_VerifikasiA extends EUI_Model
 else if ($type == 'ask_3') {
 			// var_dump('additinonal cc',$param['additional_cc']); 
 			// var_dump('flag',$rowCustomer[0]->count_of_supplement);
-			// die;
 			$supp_name=null;
-			if($param['additional_cc'] != $rowCustomer[0]->count_of_supplement){
-			 	$_pass=0;
+			if($param['additional_cc'] == 1 && $rowCustomer[0]->count_of_supplement < 0 || $param['additional_cc'] == 1 && $rowCustomer[0]->count_of_supplement == NULL){
+				// echo "test"; 
+				$_pass=0;
 			 }else{
+				//  echo "masuk";
 
-			 	// if($param['additional_cc'] != $rowCustomer[0]->count_of_supplement){
+			 	// if($param['additional_cc'] != $rowCustomer[0]->flag_suplement){
                 //     $_pass=0;
 			 	// }
 	
-      		 	if($rowCustomer[0]->Supp_Name_1==strtoupper($param['total_additional_cc'])){
+      		 	if($rowCustomer[0]->Supp_Name_1==$param['total_additional_cc']){
 					$supp_name=$rowCustomer[0]->Supp_Name_1;
 				} else
-				if($rowCustomer[0]->Supp_Name_2==strtoupper($param['total_additional_cc'])){
+				if($rowCustomer[0]->Supp_Name_2==$param['total_additional_cc']){
 					$supp_name=$rowCustomer[0]->Supp_Name_2;
 				} else
-				if($rowCustomer[0]->Supp_Name_3==strtoupper($param['total_additional_cc'])){
+				if($rowCustomer[0]->Supp_Name_3==$param['total_additional_cc']){
 					$supp_name=$rowCustomer[0]->Supp_Name_3;
 				} else 
-				if($rowCustomer[0]->Supp_Name_4==strtoupper($param['total_additional_cc'])){
+				if($rowCustomer[0]->Supp_Name_4==$param['total_additional_cc']){
 					$supp_name=$rowCustomer[0]->Supp_Name_4;
 				} else 
-				if($rowCustomer[0]->Supp_Name_5==strtoupper($param['total_additional_cc'])){
+				if($rowCustomer[0]->Supp_Name_5==$param['total_additional_cc']){
 					$supp_name=$rowCustomer[0]->Supp_Name_5;
-				}elseif($rowCustomer[0]->Supp_Name_1!=strtoupper($param['total_additional_cc'])){				
-					$supp_name=$this->veractivity_hilman(strtoupper($param['total_additional_cc']),$rowCustomer[0]->Supp_Name_1);
+				}elseif($rowCustomer[0]->Supp_Name_1!=$param['total_additional_cc']){				
+					$supp_name=$this->veractivity_hilman($param['total_additional_cc'],$rowCustomer[0]->Supp_Name_1);
 					if($supp_name==null){
-						$supp_name=$this->veractivity_hilman(strtoupper($param['total_additional_cc']),$rowCustomer[0]->Supp_Name_2);
+						$supp_name=$this->veractivity_hilman($param['total_additional_cc'],$rowCustomer[0]->Supp_Name_2);
 						if($supp_name==null){
-							$supp_name=$this->veractivity_hilman(strtoupper($param['total_additional_cc']),$rowCustomer[0]->Supp_Name_3);
+							$supp_name=$this->veractivity_hilman($param['total_additional_cc'],$rowCustomer[0]->Supp_Name_3);
 							if($supp_name==null){
-								$supp_name=$this->veractivity_hilman(strtoupper($param['total_additional_cc']),$rowCustomer[0]->Supp_Name_4);
+								$supp_name=$this->veractivity_hilman($param['total_additional_cc'],$rowCustomer[0]->Supp_Name_4);
 								if($supp_name==null){
-									$supp_name=$this->veractivity_hilman(strtoupper($param['total_additional_cc']),$rowCustomer[0]->Supp_Name_5);
+									$supp_name=$this->veractivity_hilman($param['total_additional_cc'],$rowCustomer[0]->Supp_Name_5);
 								}
 							}	
 				
@@ -737,6 +738,9 @@ else if ($type == 'ask_3') {
 			//gua tau ini. ini kenpa a0 gara2 nya si customer ini dia ga punya supplename
 			// var_dump('flag',$rowCustomer[0]->flag_suplement);
 			// die;
+			// $new = $rowCustomer[0]->flag_suplement == 0 ? 0 : $supp_name;
+			// $_value = $rowCustomer[0]->flag_suplement.'|'.$new;
+			// $_input = $param['additional_cc'].'|'.$param['total_additional_cc'];
 			if ($rowCustomer[0]->count_of_supplement== NULL || $rowCustomer[0]->count_of_supplement== 0) {
 				$flagsup = 0;
 			}else{
@@ -744,7 +748,7 @@ else if ($type == 'ask_3') {
 			}
 
 			// $new = $flagsup == 0 ? 0 : $supp_name;
-			if ($rowCustomer[0]->count_of_supplement == 1) {
+			if ($rowCustomer[0]->count_of_supplement > 0) {
 				$new = $supp_name;
 			}else  {
 				$new = 0;
@@ -752,15 +756,6 @@ else if ($type == 'ask_3') {
 			// $new = $rowCustomer[0]->count_of_supplement == 0 ? 0 : $supp_name;
 			$_value = $flagsup.'|'.$new;
 			$_input = $param['additional_cc'].'|'.strtoupper($param['total_additional_cc']);
-			// var_dump($new );
-			// var_dump($supp_name);
-			
-			// var_dump($rowCustomer[0]->count_of_supplement,  $_value );
-			// die;
-			// 	if($supp_name == $rowCustomer[0]->Supp_Name_1 || $supp_name == $rowCustomer[0]->Supp_Name_2 || $supp_name == $rowCustomer[0]->Supp_Name_3 || $supp_name == $rowCustomer[0]->Supp_Name_4 || $supp_name == $rowCustomer[0]->Supp_Name_5){
-			// 		$_pass=1;
-			// 	} 
-			
 
 
 
@@ -881,8 +876,6 @@ else if ($type == 'ask_3') {
 			
 
 			$_value = $rowCustomer[0]->count_of_primary_card.'|'.$cardIn;
-			// var_dump('test',$_value);
-			// die;
 			$_input = $param['total_jenis_cc'].'|'.$card;
 
 
@@ -970,19 +963,19 @@ else if ($type == 'ask_3') {
 		// // edit hilman 19082020
 		//  if($type == 'ask_3'){
             
-        //     if($supp_name == $rowCustomer[0]->Supp_Name_1){
-        //     	$_pass=1;
-        //     }elseif($supp_name == $rowCustomer[0]->Supp_Name_2){
-        //     	$_pass=1;
-        //     }
-        //     elseif($supp_name == $rowCustomer[0]->Supp_Name_3){
-        //     	$_pass=1;
-        //     }
-        //     elseif($supp_name == $rowCustomer[0]->Supp_Name_4){
-        //     	$_pass=1;
-        //     }else{
-        //     	$_pass=0;
-        //     }
+  //           if($supp_name == $rowCustomer[0]->Supp_Name_1){
+  //           	$_pass=1;
+  //           }elseif($supp_name == $rowCustomer[0]->Supp_Name_2){
+  //           	$_pass=1;
+  //           }
+  //           elseif($supp_name == $rowCustomer[0]->Supp_Name_3){
+  //           	$_pass=1;
+  //           }
+  //           elseif($supp_name == $rowCustomer[0]->Supp_Name_4){
+  //           	$_pass=1;
+  //           }else{
+  //           	$_pass=0;
+  //           }
 
 		//  }
 

@@ -14,7 +14,7 @@ set_time_limit(0);
  * @param	bool
  * @return	string
  */
-class U_Suplement extends EUI_Upload
+class U_Balcon extends EUI_Upload
 {
 	 	/**
 	  	* @param  [type] $CustomerId [description]
@@ -55,7 +55,7 @@ class U_Suplement extends EUI_Upload
 	 * @param	bool
 	 * @return	string
 	 */
- 	function U_Suplement()
+ 	function U_Balcon()
 	{
   		$this->_get_campaignId();
   		$this->load->model(array('M_SysUser','M_Tools','M_MgtBlacklist'));
@@ -898,8 +898,7 @@ class U_Suplement extends EUI_Upload
 				$this->db->set('Supp_Name_3', $values['Supp_Name_3']);
 				$this->db->set('Supp_Name_4', $values['Supp_Name_4']);
 				$this->db->set('Supp_Name_5', $values['Supp_Name_5']);
-				$this->db->set('expired_date', $values['expired_date']);				
-				// $this->db->set('GenderId', $values['sex']);				
+				$this->db->set('expired_date', $values['end_tele']);
 				// $this->db->set('expired_date', $date);
 				$this->db->insert("t_gn_customer", $_array_select);
 				// var_dump( $this->db->last_query() ); die();
